@@ -38,7 +38,30 @@ const SignUp = ({ toggleForm }) => {
     // Check password strength using zxcvbn
     const result = zxcvbn(password);
     setPasswordStrength(result.score); // Score: 0 to 4
-    setPasswordFeedback(result.feedback.suggestions.join(", "));
+
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasDigits = /\d/.test(password);
+    const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (password.length < minLength) {
+      setPasswordFeedback("Password must be at least 8 characters long.");
+    } else {
+      if (!hasUpperCase || !hasLowerCase) {
+        setPasswordFeedback(
+          "Password must contain both uppercase and lowercase letters."
+        );
+      }
+      if (!hasDigits) {
+        setPasswordFeedback("Password must contain at least one digit.");
+      }
+      if (!hasSpecialChars) {
+        setPasswordFeedback(
+          "Password must contain at least one special character."
+        );
+      }
+    }
   };
 
   const getProgressBarColor = () => {
