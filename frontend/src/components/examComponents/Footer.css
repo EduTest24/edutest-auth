@@ -1,0 +1,105 @@
+/* Footer (Navigation Panel) Styles */
+.foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff; /* White background for modern look */
+  padding: 10px 20px;
+  border-top: 1px solid #e0e0e0; /* Neutral Gray divider */
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Subtle top shadow for depth */
+  position: fixed; /* Fixes the footer at the bottom */
+  bottom: 0; /* Aligns the footer to the bottom of the viewport */
+  left: 0;
+  width: 100%; /* Ensures the footer spans the full width of the viewport */
+  z-index: 1000; /* Keeps the footer above other elements */
+}
+
+/* Clear Selection Button (Danger Style) */
+.clear-btn {
+  background-color: #ffcdd2; /* Light Red Background */
+  color: #d32f2f; /* Danger Red Text */
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.clear-btn:hover {
+  background-color: #e02222; /* Danger Red on Hover */
+  color: #ffffff; /* White text for contrast */
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 35px;
+  gap: 1.5rem;
+}
+
+/* Navigation Buttons (Teal Green) */
+.nav-btn {
+  background-color: #e0f2f1; /* Light Teal Background */
+  color: #15b8a5; /* Teal Green Text */
+  border: none;
+  border-radius: 10px; /* Circular buttons for icon-only style */
+  padding: 10px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #59cbbe; /* Teal Green on Hover */
+  color: #ffffff; /* White text for contrast */
+}
+
+.nav-btn:disabled {
+  background-color: #b2dfdb; /* Light Grayish-Teal for Disabled */
+  color: #757575; /* Neutral Gray Text */
+  cursor: not-allowed;
+}
+
+/* Icons inside Navigation Buttons */
+.nav-btn i {
+  font-size: 20px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .clear-btn {
+    margin-bottom: 10px;
+    width: 100%; /* Full width for smaller screens */
+  }
+
+  .nav-btn {
+    margin: 5px 0;
+  }
+}
+.mark-btn {
+  background-color: #4caf50; /* Green */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.review-btn {
+  background-color: #ff9800; /* Orange */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

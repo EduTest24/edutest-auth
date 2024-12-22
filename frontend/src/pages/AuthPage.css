@@ -1,0 +1,144 @@
+/* Body Styles */
+.auth {
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(
+    135deg,
+    #b8a6ff,
+    #646fff
+  ); /* Soft blue background */
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+/* Auth Page Container */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* Form Container */
+.form-container {
+  background: rgba(255, 255, 255, 0.9); /* Light white background */
+  border-radius: 20px;
+  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  width: 380px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.form-container:hover {
+  box-shadow: 0 8px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Auth Form */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #333; /* Dark text for readability */
+}
+
+/* Form Heading */
+.auth-form h2 {
+  text-align: center;
+  color: #3a8d99; /* Muted teal for headings */
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Form Input Styles */
+.auth-form input {
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #333;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.auth-form input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.auth-form input:focus {
+  border: 2px solid #6a90a1; /* Muted teal focus border */
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Form Button Styles */
+.auth-form button {
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  background: linear-gradient(90deg, #ffb84d, #f0a500); /* Gold gradient */
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(255, 182, 77, 0.3);
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.auth-form button:hover {
+  background: linear-gradient(
+    90deg,
+    #f0a500,
+    #ffb84d
+  ); /* Inverted gradient for hover effect */
+  transform: scale(1.05); /* Button scaling effect */
+  box-shadow: 0 6px 20px rgba(255, 182, 77, 0.4);
+}
+
+.auth-form button:active {
+  transform: scale(1); /* Button returns to normal size on click */
+  box-shadow: 0 4px 15px rgba(255, 182, 77, 0.3);
+}
+
+/* Toggle Link Styles */
+.toggle-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.toggle-link button {
+  background: none;
+  border: none;
+  color: #6a90a1; /* Muted teal for toggle links */
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.toggle-link button:hover {
+  color: #ffb84d; /* Gold hover effect */
+  text-decoration: underline;
+  color: white !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .form-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .auth-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .auth-form button {
+    font-size: 0.9rem;
+  }
+}

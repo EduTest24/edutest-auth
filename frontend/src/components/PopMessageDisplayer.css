@@ -1,0 +1,62 @@
+/* PopMessageDisplayer.css */
+.popup-message {
+  position: fixed;
+  top: -60px; /* Initially hidden above the viewport */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  background-color: whitesmoke;
+  color: #242424; /* White text */
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+  z-index: 1000;
+  padding: 10px 0;
+  transition: top 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  opacity: 0; /* Initially hidden */
+}
+
+.popup-message.show {
+  top: 20px; /* Slide down to be visible */
+  opacity: 1; /* Make it visible */
+}
+
+.popup-message .progress-bar {
+  position: absolute;
+  bottom: 0; /* Positioned at the bottom of the box */
+  left: 0;
+  height: 4px; /* Height of the progress bar */
+  width: 100%;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.3
+  ); /* Light transparent background for contrast */
+  overflow: hidden;
+}
+
+.popup-message .progress-bar span {
+  display: block;
+  height: 100%;
+  background-color: #fff; /* Default progress color */
+  animation: progress 5s linear forwards; /* Progress bar animation */
+}
+
+.popup-message.success .progress-bar span {
+  background-color: #66bb6a; /* Success progress bar color */
+}
+
+.popup-message.error .progress-bar span {
+  background-color: #e57373; /* Error progress bar color */
+}
+
+@keyframes progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}

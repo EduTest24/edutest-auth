@@ -1,0 +1,202 @@
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-left: 1px solid #e0e0e0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+}
+
+.sidebar.closed {
+  transform: translateX(100%);
+}
+
+.side_btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Button Styles */
+.close-btn,
+.submit-btn {
+  display: block;
+  padding: 12px;
+  background-color: #4c70af;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.close-btn {
+  background-color: transparent;
+  color: #f44336;
+}
+
+/* Summary Section Styles */
+.summary {
+  background-color: #ffffff; /* White card background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 300px; /* Limit width for sidebar */
+  margin-bottom: 10px;
+}
+
+.summary-title {
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  font-size: 1.25rem; /* Larger font size for title */
+  background-color: #4281ff;
+  font-weight: 400; /* Bold title */
+  color: #ffffff;
+}
+
+.summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 13px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between; /* Align label and count on opposite sides */
+  align-items: center; /* Vertically center content */
+  font-size: 0.9rem; /* Slightly smaller text */
+  color: #757575; /* Secondary text color */
+}
+
+.summary-label {
+  color: #757575; /* Label color */
+}
+
+.summary-count {
+  font-weight: bold; /* Highlight counts */
+}
+
+.marked {
+  color: #2196f3; /* Blue for marked */
+}
+
+.reviewed {
+  color: #ffc107; /* Amber for reviewed */
+}
+
+.skipped {
+  color: #f44336; /* Red for skipped */
+}
+
+.unvisited {
+  color: #bdbdbd; /* Neutral gray for unvisited */
+}
+.answered {
+  color: #4caf50; /* Green for answered */
+}
+
+/* Tab Section */
+.tabs {
+  margin-bottom: 20px;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tab-btn {
+  flex: 1;
+  margin-right: 5px;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.tab-btn:last-child {
+  margin-right: 0;
+}
+
+.tab-btn.active {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+/* Question Numbers */
+.question-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.question-box {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #e0e0e0;
+  color: #333333 !important;
+}
+
+.question-box.active {
+  border: 2px solid #333333;
+}
+
+.question-box.answered {
+  background-color: #b7ffb9 !important;
+  border: 1px solid #0af812 !important;
+}
+
+.question-box.skipped {
+  background-color: #ffe5ba !important;
+  border: 1px solid #eb950a !important;
+}
+
+.question-box.marked {
+  background-color: #adc5ff;
+  border: 1px solid#0f4ee0;
+}
+
+.question-box.reviewed {
+  background-color: #ffaba5;
+  border: 1px solid #e3281a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    position: fixed;
+    right: -100%;
+    top: 0;
+    bottom: 0;
+  }
+
+  .sidebar.open {
+    transform: translateX(-100%); /* Show sidebar on smaller devices */
+  }
+
+  .tab-btn {
+    font-size: 12px; /* Adjust font size for smaller devices */
+  }
+
+  .question-box {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+}

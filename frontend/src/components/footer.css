@@ -1,0 +1,44 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: #004aad;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin: 0 1rem;
+}
+
+.footer-section h3 {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section p,
+.footer-section ul {
+  font-size: 0.9rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  text-align: center;
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+}

@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* General button styling */
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff; /* Primary blue */
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-btn i {
+  margin-right: 8px; /* Space between icon and text */
+  font-size: 18px;
+}
+
+.admin-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.admin-btn:active {
+  background-color: #003f7f; /* Even darker blue when clicked */
+  transform: scale(0.98); /* Button depress effect */
+}
+
+.admin-btn:focus {
+  outline: 3px solid #80d4ff; /* Focus ring for accessibility */
+}
+
+.exam {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+/* landing.css */
+.dashboard-btn-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.dashboard-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.dashboard-btn:hover {
+  background-color: #45a049;
+}

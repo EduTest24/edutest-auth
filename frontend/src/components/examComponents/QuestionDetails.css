@@ -1,0 +1,89 @@
+/* Main container for Question Details */
+.question-details {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+/* Row 1: Question Info */
+.question-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.question-number {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2196f3; /* Primary Blue */
+}
+
+.question-content h2 {
+  font-size: 18px;
+  color: #333333; /* Primary Text */
+}
+
+.question-image {
+  max-width: 50%;
+}
+
+/* Row 2: Options Container */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  width: 40%;
+  gap: 10px;
+}
+
+/* Options for SCQ */
+.options .option {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: #e3f2fd; /* Light Blue */
+  border: 1px solid #2196f3; /* Primary Blue */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.options .option:hover {
+  background-color: #2196f3; /* Blue hover */
+  color: #ffffff; /* White text */
+}
+
+.options .option img {
+  max-width: 50px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+/* Selected option */
+.options .option.selected {
+  background-color: #b8ffba; /* Green for selected */
+  color: black;
+  border-color: #4caf50;
+}
+
+.numerical-input-container {
+  margin: 10px 0;
+}
+
+.numerical-input {
+  width: 60%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.numerical-input:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}

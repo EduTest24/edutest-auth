@@ -1,0 +1,134 @@
+/* Dashboard.css */
+
+/* General styles */
+.results-container {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.results-container h3 {
+  font-size: 1.5rem;
+  color: #333333;
+  margin-bottom: 16px;
+}
+
+.results-container .card {
+  border-radius: 10px;
+}
+
+/* Top cards styling */
+.card-title {
+  font-size: 1.1rem;
+  margin-top: 12px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card-body h5 {
+  font-size: 1rem;
+}
+
+/* Circular progress bar styling */
+.card .circular-progressbar {
+  margin-top: 16px;
+  height: 120px;
+  width: 120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Expandable Cards */
+.question-stats .card {
+  margin-bottom: 16px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.question-stats .card:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.question-stats .card .card-body {
+  padding: 12px;
+}
+
+.question-stats .card .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333333;
+}
+
+.question-stats .card .card-text {
+  font-size: 0.9rem;
+  color: #555555;
+}
+
+/* Color Schemes for Different Card Types */
+.correct-card {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.incorrect-card {
+  background-color: #f44336;
+  color: #ffffff;
+}
+
+.marked-card {
+  background-color: #ffc107;
+  color: #ffffff;
+}
+
+.skipped-card {
+  background-color: #ffebee;
+  color: #555555;
+}
+
+.unanswered-card {
+  background-color: #fff8e1;
+  color: #555555;
+}
+
+.correct-card .card-body {
+  background-color: #e8f5e9;
+}
+
+.incorrect-card .card-body {
+  background-color: #ffebee;
+}
+
+.marked-card .card-body {
+  background-color: #fff8e1;
+}
+
+.skipped-card .card-body {
+  background-color: #ffebee;
+}
+
+.unanswered-card .card-body {
+  background-color: #fff8e1;
+}
+
+/* Time Graph Section */
+.line-graph {
+  margin-top: 40px;
+}
+
+/* Icon Styling */
+.card-body .react-icons {
+  font-size: 24px;
+  margin-top: 8px;
+  color: #ffffff;
+}
