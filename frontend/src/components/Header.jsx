@@ -60,7 +60,9 @@ const Header = () => {
     const email = localStorage.getItem("email");
 
     try {
-      await axios.post("http://localhost:5000/auth/signout", { email });
+      await axios.post("https://edutest-frontend.onrender.com/auth/signout", {
+        email,
+      });
 
       // Clear user data from localStorage
       localStorage.removeItem("token");

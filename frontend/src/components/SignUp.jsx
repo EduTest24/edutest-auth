@@ -12,11 +12,14 @@ const SignUp = ({ toggleForm }) => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/auth/signup", {
-        username,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://edutest-frontend.onrender.com/auth/signup",
+        {
+          username,
+          email,
+          password,
+        }
+      );
       alert(response.data.message);
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);

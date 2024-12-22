@@ -110,7 +110,7 @@ const JeeMainExam = () => {
   const fetchQuestions = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/exam/jeemain",
+        "https://edutest-frontend.onrender.com/api/exam/jeemain",
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -266,7 +266,7 @@ const JeeMainExam = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/exam/jeemain/result",
+        "https://edutest-frontend.onrender.com/api/exam/jeemain/result",
         payload,
         { headers: { Authorization: `Bearer ${token}` } }
       );

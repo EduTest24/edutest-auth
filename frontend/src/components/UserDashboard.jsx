@@ -94,7 +94,7 @@ const UserDashboard = () => {
   const fetchUserResults = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/exam/results/${username}`,
+        `https://edutest-frontend.onrender.com/api/exam/results/${username}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

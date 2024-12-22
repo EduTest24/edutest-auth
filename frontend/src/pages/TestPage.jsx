@@ -26,9 +26,12 @@ const TestPage = () => {
   // Fetch questions from the backend API
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/questions", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        "https://edutest-frontend.onrender.com/api/questions",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setQuestions(response.data);
     } catch (error) {
       console.error("Error fetching questions:", error);
@@ -56,7 +59,7 @@ const TestPage = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/test-result",
+        "https://edutest-frontend.onrender.com/api/test-result",
         {
           username,
           score: calculatedScore,

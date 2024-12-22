@@ -37,7 +37,7 @@ const AdminQuestionForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/admin/questions",
+        "https://edutest-frontend.onrender.com/admin/questions",
         questionData
       );
       alert("Question added successfully!");
