@@ -65,9 +65,8 @@
 
 /* Selected option */
 .options .option.selected {
-  background-color: #b8ffba; /* Green for selected */
-  color: black;
-  border-color: #4caf50;
+  background-color: #2196f3; /* Green for selected */
+  color: #ffffff;
 }
 
 .numerical-input-container {
@@ -84,6 +83,23 @@
 }
 
 .numerical-input:focus {
-  border-color: #4caf50;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  border-color: #4c66af;
+  box-shadow: 0 0 5px rgba(73, 97, 200, 0.637);
+}
+@media (max-width: 768px) {
+  .question-details {
+    flex-direction: column;
+    gap: 0;
+  }
+  .question-image {
+    max-width: 100%;
+  }
+  .options-container {
+    width: 100%;
+    margin-left: 0;
+  }
+  .numerical-input {
+    width: 100%;
+    margin-top: 20px;
+  }
 }

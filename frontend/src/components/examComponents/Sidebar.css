@@ -19,26 +19,27 @@
 
 .side_btn {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 /* Button Styles */
 .close-btn,
 .submit-btn {
-  display: block;
-  padding: 12px;
-  background-color: #4c70af;
-  color: #fff;
+  padding: 8px 12px;
+  background-color: #ffcdd2; /* Light Red Background */
+  color: #d32f2f;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-.close-btn {
-  background-color: transparent;
-  color: #f44336;
+.close-btn:hover,
+.submit-btn:hover {
+  background-color: #e02222; /* Danger Red on Hover */
+  color: #ffffff;
 }
 
 /* Summary Section Styles */
@@ -181,13 +182,14 @@
   .sidebar {
     width: 100%;
     position: fixed;
-    right: -100%;
     top: 0;
     bottom: 0;
+    z-index: 1001;
   }
 
   .sidebar.open {
     transform: translateX(-100%); /* Show sidebar on smaller devices */
+    right: 0;
   }
 
   .tab-btn {

@@ -98,11 +98,6 @@ const Header = () => {
           <a href="/">EduTEST</a>
         </h1>
 
-        {/* Hamburger Icon for Small Screens */}
-        <div className="hamburger-icon md:hidden" onClick={toggleMenu}>
-          <FontAwesomeIcon icon={faBars} />
-        </div>
-
         <nav className={`nav-links ${isMenuOpen ? "block" : "hidden"} md:flex`}>
           <a href="/studymaterial" className="nav-link">
             Study Material

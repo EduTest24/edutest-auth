@@ -12,57 +12,9 @@
   font-weight: bold;
 }
 
-.nav-links {
-  display: flex;
-  gap: 20px;
-}
-
 .auth-container {
   display: flex;
   align-items: center;
-}
-
-.sign-in-button,
-.sign-out-btn,
-.dashboard-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #4caf50; /* Default green background */
-  border: none;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 25px; /* Rounded corners for modern look */
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  gap: 10px; /* Space between icon and text */
-}
-
-.sign-in-button:hover,
-.sign-out-btn:hover,
-.dashboard-btn:hover {
-  background-color: #388e3c; /* Darker green on hover */
-  transform: scale(1.05); /* Slightly enlarge on hover */
-}
-
-.sign-in-button:active,
-.sign-out-btn:active,
-.dashboard-btn:active {
-  transform: scale(0.98); /* Slightly shrink on click for feedback */
-}
-
-/* Sign Out button - Alert Red */
-.sign-out-btn {
-  background-color: #f44336; /* Red color for alert */
-}
-
-.sign-out-btn:hover {
-  background-color: #d32f2f; /* Darker red on hover */
-}
-
-.sign-out-btn:active {
-  background-color: #c62828; /* Even darker red on click */
 }
 
 .user-logo {
@@ -76,14 +28,14 @@
   color: #2196f3;
   font-weight: bold;
   font-size: 18px;
-  margin-right: 10px;
+  margin-left: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .user-logo:hover {
-  background-color: #e0f7fa; /* Light blue background on hover */
-  transform: scale(1.1); /* Slightly increase size on hover */
+  background-color: #e0f7fa;
+  transform: scale(1.1);
 }
 
 .dropdown-menu {
@@ -115,7 +67,21 @@
   background-color: #f0f0f0;
 }
 
-.btn-icon {
-  margin-right: 8px;
-  font-size: 18px; /* Adjust icon size for better fit */
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .header {
+    flex-direction: row;
+  }
+
+  .website-name {
+    font-size: 20px;
+  }
+
+  .auth-container {
+    margin-left: auto;
+  }
 }

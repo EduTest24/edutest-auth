@@ -35,8 +35,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 35px;
-  gap: 1.5rem;
+  gap: 1rem;
+  margin-left: 15px;
 }
 
 /* Navigation Buttons (Teal Green) */
@@ -44,8 +44,8 @@
   background-color: #e0f2f1; /* Light Teal Background */
   color: #15b8a5; /* Teal Green Text */
   border: none;
-  border-radius: 10px; /* Circular buttons for icon-only style */
-  padding: 10px;
+  border-radius: 5px; /* Circular buttons for icon-only style */
+  padding: 11px 10px;
   font-size: 18px;
   display: flex;
   align-items: center;
@@ -69,37 +69,31 @@
 .nav-btn i {
   font-size: 20px;
 }
-
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .footer {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .clear-btn {
-    margin-bottom: 10px;
-    width: 100%; /* Full width for smaller screens */
-  }
-
-  .nav-btn {
-    margin: 5px 0;
-  }
-}
 .mark-btn {
-  background-color: #4caf50; /* Green */
-  color: white;
-  padding: 10px;
+  background-color: #98ff9d;
+  color: #007604;
+  padding: 8px 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mark-btn:hover {
+  background-color: #00ae06; /* Green */
+  color: white;
 }
 
 .review-btn {
-  background-color: #ff9800; /* Orange */
-  color: white;
-  padding: 10px;
+  background-color: #ffc979;
+  color: #8f5702;
+  padding: 8px 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.review-btn:hover {
+  background-color: #ff9800; /* Orange */
+  color: white;
 }

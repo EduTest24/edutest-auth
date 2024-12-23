@@ -21,7 +21,7 @@ const Footer = ({
     <div className="foot">
       {/* Clear Selection Button */}
       <button className="clear-btn" onClick={clearSelection}>
-        Clear Selection
+        Clear
       </button>
 
       {/* Mark and Review Buttons */}

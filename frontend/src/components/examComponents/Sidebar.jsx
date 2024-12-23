@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import "./Sidebar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = ({
   questions,
@@ -50,7 +52,7 @@ const Sidebar = ({
       <div className="side_btn">
         {/* Close Button */}
         <button className="close-btn" onClick={toggleSidebar}>
-          ✖
+          <FontAwesomeIcon icon={faTimes} className="mx-2" />
         </button>
 
         {/* Submit Button */}
