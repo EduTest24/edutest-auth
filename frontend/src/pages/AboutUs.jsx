@@ -28,7 +28,7 @@ const AboutUs = () => {
             <div className="w-full md:w-1/2 text-center md:text-left">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">About Us</h1>
               <p className="text-lg leading-relaxed mb-6">
-                Welcome to <span className="font-bold">EduVerse</span>, your
+                Welcome to <span className="font-bold">EduTEST</span>, your
                 trusted partner in exam preparation. We are committed to
                 providing students with world-class study tools, resources, and
                 mock tests to help them achieve their academic goals.
@@ -55,10 +55,9 @@ const AboutUs = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-800">Our Story</h2>
             <p className="text-gray-600 mt-4">
-              EduVerse was born out of a passion for empowering students to
-              excel in their studies. Our mission is to provide accessible,
-              reliable, and innovative learning solutions to students across the
-              globe.
+              EduTEST was born out of a passion for empowering students to excel
+              in their studies. Our mission is to provide accessible, reliable,
+              and innovative learning solutions to students across the globe.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -112,7 +111,7 @@ const AboutUs = () => {
                 Why Choose Us?
               </h2>
               <p className="text-gray-600 mt-4">
-                Here’s what makes EduVerse the right choice for your learning
+                Here’s what makes EduTEST the right choice for your learning
                 needs.
               </p>
             </div>

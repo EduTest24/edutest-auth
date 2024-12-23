@@ -22,10 +22,10 @@ const ExploreCategories = () => {
               Access mock exams, practice papers, and more.
             </p>
             <Link
-              to="/exams"
+              to="/entranceexam"
               className="inline-block px-6 py-2 bg-gradient-to-r from-blue-400 to-blue-500 text-white rounded-lg shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
             >
-              Go to Exams
+              Exams
             </Link>
           </div>
 
@@ -39,10 +39,10 @@ const ExploreCategories = () => {
               Find all the resources you need for effective learning.
             </p>
             <Link
-              to="/study-material"
+              to="/studymaterial"
               className="inline-block px-6 py-2 bg-gradient-to-r from-green-400 to-green-500 text-white rounded-lg shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
             >
-              Go to Study Material
+              Study Material
             </Link>
           </div>
 
@@ -56,10 +56,10 @@ const ExploreCategories = () => {
               Track your progress and get insights into your performance.
             </p>
             <Link
-              to="/performance-monitor"
+              to="/dashboard"
               className="inline-block px-6 py-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white rounded-lg shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
             >
-              Go to Performance Monitor
+              Performance Monitor
             </Link>
           </div>
 
@@ -76,7 +76,7 @@ const ExploreCategories = () => {
               to="/forums"
               className="inline-block px-6 py-2 bg-gradient-to-r from-purple-400 to-purple-500 text-white rounded-lg shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
             >
-              Go to Forums
+              Forums
             </Link>
           </div>
         </div>

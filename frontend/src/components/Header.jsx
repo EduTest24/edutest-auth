@@ -98,7 +98,11 @@ const Header = () => {
           <a href="/">EduTEST</a>
         </h1>
 
-        <nav className={`nav-links ${isMenuOpen ? "block" : "hidden"} md:flex`}>
+        <nav
+          className={`nav-links ${
+            isMenuOpen ? "block" : "hidden"
+          } md:flex gap-2`}
+        >
           <a href="/studymaterial" className="nav-link">
             Study Material
           </a>

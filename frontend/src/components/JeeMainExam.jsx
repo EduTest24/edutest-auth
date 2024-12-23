@@ -11,6 +11,7 @@ import QuestionPaper from "./examComponents/Paper";
 import Modal from "./examComponents/Modal";
 import SolutionPage from "./Solution";
 import "./JeeMainExam.css";
+import Loader from "./loader";
 
 const JeeMainExam = () => {
   const [questions, setQuestions] = useState([]);
@@ -415,7 +416,7 @@ const JeeMainExam = () => {
   };
 
   if (questions.length === 0) {
-    return <p>Loading questions...</p>;
+    return <Loader />;
   }
 
   const currentQuestion = questions[currentQuestionIndex];

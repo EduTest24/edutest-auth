@@ -11,7 +11,7 @@ const MainSection = () => {
   return (
     <>
       {" "}
-      <section className="hero-section bg-blue-50 py-16">
+      <section className="hero-section bg-blue-50 py-16 h-svh">
         <div className="container mx-auto px-6 flex flex-row md:flex-row items-center">
           {/* Text Content */}
           <div className="text-content md:w-1/2">
@@ -21,15 +21,9 @@ const MainSection = () => {
               Mock Tests & Study Materials.
             </h1>
             <p className="mt-4 text-gray-600">
-              Prepare smarter with EduVerse. Access mock tests and previous year
+              Prepare smarter with EduTEST. Access mock tests and previous year
               question papers for exams like JEE, MHTCET, and more!
             </p>
-            <a
-              href="/auth"
-              className="mt-6 inline-block bg-green-500 text-white text-lg font-medium py-3 px-8 rounded-lg hover:bg-green-600 transition"
-            >
-              Get Started
-            </a>
           </div>
           {/* Hero Image */}
           <img
@@ -45,7 +39,7 @@ const MainSection = () => {
         <div className="container mx-auto px-6 text-center">
           {/* Section Heading */}
           <h2 className="text-3xl font-bold text-gray-800 mb-6">
-            Why Choose <span className="text-blue-500">EduVerse</span>?
+            Why Choose <span className="text-blue-500">EduTEST </span>?
           </h2>
           <p className="text-gray-600 mb-12">
             Explore our key highlights that make your exam preparation smarter

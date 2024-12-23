@@ -13,6 +13,7 @@ import {
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
 import ExamSummaryCard from "./ExamSummaryCard";
+import Loader from "./loader";
 
 const UserDashboard = () => {
   const [userResults, setUserResults] = useState([]);
@@ -208,7 +209,7 @@ const UserDashboard = () => {
   const totalPages = Math.ceil(filteredResults.length / resultsPerPage);
 
   if (loading) {
-    return <p className="text-center text-lg text-gray-600">Loading...</p>;
+    return <Loader />;
   }
 
   return (
@@ -221,9 +222,9 @@ const UserDashboard = () => {
         </h1>
         <button
           onClick={home}
-          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 flex items-center"
+          className="bg-blue-600 text-white py-2 px-2 rounded hover:bg-blue-700 flex items-center"
         >
-          <FontAwesomeIcon icon={faHome} className="mr-2" /> Home
+          <FontAwesomeIcon icon={faHome} />
         </button>
       </div>
 
@@ -243,7 +244,7 @@ const UserDashboard = () => {
       </div>
 
       {/* Render the ExamOverviewCard for each exam */}
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="flex flex-wrap justify-center gap-6 mb-4">
         <ExamSummaryCard examData={examData} />
       </div>
 
@@ -266,7 +267,6 @@ const UserDashboard = () => {
       {/* Results Table */}
       <div className="bg-white shadow rounded p-4">
         <h2 className="text-xl font-semibold text-blue-700 mb-4 flex items-center">
-          {" "}
           <FontAwesomeIcon icon={faTable} className="mr-2" />
           Exam Results
         </h2>
@@ -274,46 +274,49 @@ const UserDashboard = () => {
           <p className="text-gray-600">No exam results found.</p>
         ) : (
           <>
-            <table className="w-full table-auto border-collapse border border-blue-200">
-              <thead>
-                <tr className="bg-blue-100">
-                  <th className="p-2 border border-blue-300">Exam Name</th>
-                  <th className="p-2 border border-blue-300">Score</th>
-                  <th className="p-2 border border-blue-300">Correct</th>
-                  <th className="p-2 border border-blue-300">Incorrect</th>
-                  <th className="p-2 border border-blue-300">Skipped</th>
-                  <th className="p-2 border border-blue-300">Time (m)</th>
-                  <th className="p-2 border border-blue-300">Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentResults.map((result) => (
-                  <tr key={result._id} className="hover:bg-blue-50">
-                    <td className="p-2 border border-blue-300">
-                      {result.examName}
-                    </td>
-                    <td className="p-2 border border-blue-300">
-                      {result.score}
-                    </td>
-                    <td className="p-2 border border-blue-300">
-                      {result.correctAnswers.length}
-                    </td>
-                    <td className="p-2 border border-blue-300">
-                      {result.incorrectAnswers.length}
-                    </td>
-                    <td className="p-2 border border-blue-300">
-                      {result.skippedQuestions.length}
-                    </td>
-                    <td className="p-2 border border-blue-300">
-                      {calculateTotalTime(result.timeTaken)}
-                    </td>
-                    <td className="p-2 border border-blue-300">
-                      {new Date(result.timestamp).toLocaleDateString()}
-                    </td>
+            {/* Responsive Table Wrapper */}
+            <div className="overflow-x-auto">
+              <table className="w-full table-auto border-collapse border border-blue-200">
+                <thead>
+                  <tr className="bg-blue-100">
+                    <th className="p-2 border border-blue-300">Exam Name</th>
+                    <th className="p-2 border border-blue-300">Score</th>
+                    <th className="p-2 border border-blue-300">Correct</th>
+                    <th className="p-2 border border-blue-300">Incorrect</th>
+                    <th className="p-2 border border-blue-300">Skipped</th>
+                    <th className="p-2 border border-blue-300">Time (m)</th>
+                    <th className="p-2 border border-blue-300">Date</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {currentResults.map((result) => (
+                    <tr key={result._id} className="hover:bg-blue-50">
+                      <td className="p-2 border border-blue-300">
+                        {result.examName}
+                      </td>
+                      <td className="p-2 border border-blue-300">
+                        {result.score}
+                      </td>
+                      <td className="p-2 border border-blue-300">
+                        {result.correctAnswers.length}
+                      </td>
+                      <td className="p-2 border border-blue-300">
+                        {result.incorrectAnswers.length}
+                      </td>
+                      <td className="p-2 border border-blue-300">
+                        {result.skippedQuestions.length}
+                      </td>
+                      <td className="p-2 border border-blue-300">
+                        {calculateTotalTime(result.timeTaken)}
+                      </td>
+                      <td className="p-2 border border-blue-300">
+                        {new Date(result.timestamp).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
             {/* Pagination */}
             <div className="mt-4 flex justify-center items-center">
@@ -322,7 +325,7 @@ const UserDashboard = () => {
                 disabled={currentPage === 1}
                 className="px-4 py-2 bg-blue-200 rounded hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
               >
-                <FontAwesomeIcon icon={faArrowLeft} className="mr-2" /> Previous
+                <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
               </button>
               <span className="px-4 py-2">
                 Page {currentPage} of {totalPages}
@@ -334,7 +337,7 @@ const UserDashboard = () => {
                 disabled={currentPage === totalPages}
                 className="px-4 py-2 bg-blue-200 rounded hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
               >
-                Next <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+                <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
               </button>
             </div>
           </>
