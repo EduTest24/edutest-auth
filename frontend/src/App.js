@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthPage from "./pages/AuthPage";
 import LandingPage from "./pages/LandingPage";
@@ -10,6 +10,8 @@ import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import StudyMaterial from "./pages/StudyMaterial";
 import EntranceExamDashboard from "./pages/EntranceExam";
+import ExamsPage from "./pages/ExamsPage";
+import ExamDetailsPage from "./pages/ExamDetailsPage";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/studymaterial" element={<StudyMaterial />} />
         <Route path="/entranceexam" element={<EntranceExamDashboard />} />
+        <Route path="/exams" element={<ExamsPage />} />
+        <Route path="/examss/:examName" element={<ExamDetailsPage />} />
       </Routes>
     </Router>
   );

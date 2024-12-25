@@ -30,17 +30,16 @@ const Header = ({
       {/* Timer */}
       <div className="timer">{formatTime(timer)}</div>
 
-      {/* Sidebar Toggle Button */}
-      <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
-        <FontAwesomeIcon icon={faBars} />
-      </button>
-
       {/* View Complete Question Paper Button */}
       <button
         className="question-paper-toggle-btn"
         onClick={handleQuestionPaperToggle}
       >
         <FontAwesomeIcon icon={faFileAlt} />
+      </button>
+      {/* Sidebar Toggle Button */}
+      <button className="sidebar-toggle-btn" onClick={toggleSidebar}>
+        <FontAwesomeIcon icon={faBars} />
       </button>
     </div>
   );

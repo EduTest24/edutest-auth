@@ -12,8 +12,8 @@ const QuestionDetails = ({
   markedQuestions,
   reviewedQuestions,
 }) => {
-  const isMarked = markedQuestions.includes(currentQuestionIndex + 1);
-  const isReviewed = reviewedQuestions.includes(currentQuestionIndex + 1);
+  const isMarked = markedQuestions.includes(question._id);
+  const isReviewed = reviewedQuestions.includes(question._id);
   return (
     <div className="question-details">
       {/* Row 1: Question Info */}

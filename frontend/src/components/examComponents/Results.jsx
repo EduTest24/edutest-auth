@@ -10,10 +10,11 @@ import {
   FaBookOpen,
 } from "react-icons/fa";
 import { MdQuestionAnswer } from "react-icons/md";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import RankCalculator from "./Rank";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = ({
+  questions,
   results,
   markedQuestions,
   reviewedQuestions,
@@ -21,26 +22,22 @@ const Dashboard = ({
   skippedQuestions,
   timeTaken,
 }) => {
-  const totalTime = 3 * 60; // Total time in minutes (3 hours)
-  const totalTimeTaken = timeTaken.reduce((a, b) => a + b, 0);
+  const navigate = useNavigate();
+  const totalTime = 3 * 60 * 60; // Total time in seconds (3 hours)
+  const totalTimeTaken = timeTaken.reduce((a, b) => a + (b || 0), 0); // Sum of all times
   const accuracy =
     (results.correctCount / (results.correctCount + results.incorrectCount)) *
     100;
 
-  const calculateTotalTime = (timeArray) => {
-    const totalTimeInSeconds = timeArray
-      .filter((time) => time !== null)
-      .reduce((acc, curr) => acc + parseFloat(curr), 0);
-
-    const totalTimeInMinutes = (totalTimeInSeconds / 60).toFixed(2);
-    return totalTimeInMinutes;
+  // Convert seconds to HH:mm:ss format
+  const formatTime = (timeInSeconds) => {
+    const hours = Math.floor(timeInSeconds / 3600);
+    const minutes = Math.floor((timeInSeconds % 3600) / 60);
+    const seconds = timeInSeconds % 60;
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   };
-
-  const pieData = [
-    { name: "Correct", value: results.correctCount },
-    { name: "Incorrect", value: results.incorrectCount },
-    { name: "Unanswered", value: results.unansweredCount },
-  ];
 
   const renderCircularProgress = (value, total, color) => {
     const radius = 50;
@@ -99,15 +96,12 @@ const Dashboard = ({
         <div className="card bg-white p-6 rounded-lg shadow-md flex items-center space-x-4">
           <FaClock className="text-blue-500 text-3xl" />
           <div className="flex-1">
-            <h3 className="text-lg font-medium text-gray-800">
-              Total Time Taken
-            </h3>
+            <h3 className="text-lg font-medium text-gray-800">Total Time</h3>
             <p className="text-gray-600">
-              {" "}
-              {(totalTimeTaken / 60).toFixed(2)}m / 3h
+              {formatTime(totalTimeTaken)} / {formatTime(totalTime)}
             </p>
           </div>
-          {renderCircularProgress(totalTimeTaken / 60, totalTime, "#2196F3")}
+          {renderCircularProgress(totalTimeTaken, totalTime, "#2196F3")}
         </div>
 
         {/* Accuracy */}
@@ -181,17 +175,21 @@ const Dashboard = ({
         <div className="card bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-medium text-orange-600 flex items-center space-x-2">
             <MdQuestionAnswer />{" "}
-            <span>Skipped Questions ({skippedQuestions.length})</span>
+            <span>Skipped Questions ({skippedQuestions.size})</span>
           </h3>
           <div className="mt-4 text-gray-600 space-y-2">
-            {skippedQuestions.map((q, index) => (
-              <span
-                key={index}
-                className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm"
-              >
-                {q}
-              </span>
-            ))}
+            {Array.from(skippedQuestions).map((qId) => {
+              const questionIndex =
+                questions.findIndex((q) => q._id === qId) + 1; // Get the question number
+              return (
+                <span
+                  key={qId}
+                  className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm"
+                >
+                  {questionIndex}
+                </span>
+              );
+            })}
           </div>
         </div>
 
@@ -202,60 +200,69 @@ const Dashboard = ({
             <span>Reviewed Questions ({reviewedQuestions.length})</span>
           </h3>
           <div className="mt-4 text-gray-600 space-y-2">
-            {reviewedQuestions.map((q, index) => (
-              <span
-                key={index}
-                className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-              >
-                {q}
-              </span>
-            ))}
+            {reviewedQuestions.map((qId) => {
+              const questionIndex =
+                questions.findIndex((q) => q._id === qId) + 1; // Get the question number
+              return (
+                <span
+                  key={qId}
+                  className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                >
+                  {questionIndex}
+                </span>
+              );
+            })}
           </div>
         </div>
 
+        {/* Marked Questions */}
         <div className="card bg-white p-6 rounded-lg shadow-md">
           <h3 className="text-xl font-medium text-purple-600 flex items-center space-x-2">
             <FaTag /> <span>Marked Questions ({markedQuestions.length})</span>
           </h3>
           <div className="mt-4 text-gray-600 space-y-2">
             {markedQuestions.length > 0 ? (
-              markedQuestions.map((q, index) => (
-                <span
-                  key={index}
-                  className="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm"
-                >
-                  {q}
-                </span>
-              ))
+              markedQuestions.map((qId) => {
+                const questionIndex =
+                  questions.findIndex((q) => q._id === qId) + 1; // Get the question number
+                return (
+                  <span
+                    key={qId}
+                    className="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm"
+                  >
+                    {questionIndex}
+                  </span>
+                );
+              })
             ) : (
               <p className="text-gray-500">No marked questions.</p>
             )}
           </div>
         </div>
+      </div>
 
-        {/* Action Buttons */}
-        <div className="flex justify-around space-x-4 mt-6">
-          <button
-            className="flex items-center px-6 py-3 border-2 border-blue-500 text-blue-500 rounded-lg shadow-md hover:bg-blue-500 hover:text-white transition transform active:scale-95"
-            onClick={() => console.log("Retake Test")}
-          >
-            <FaRedoAlt className="mr-2" /> Test
-          </button>
+      {/* Action Buttons */}
+      <div className="flex justify-around space-x-4 mt-6">
+        <button
+          className="flex items-center px-6 py-3 border-2 border-blue-500 text-blue-500 rounded-lg shadow-md hover:bg-blue-500 hover:text-white transition transform active:scale-95"
+          onClick={() => navigate("/exams")}
+        >
+          <FaRedoAlt className="mr-2" /> Retake Test
+        </button>
 
-          <button
-            className="flex items-center px-6 py-3 border-2 border-green-500 text-green-500 rounded-lg shadow-md hover:bg-green-500 hover:text-white transition transform active:scale-95"
-            onClick={() => console.log("Go to Dashboard")}
-          >
-            <FaHome className="mr-2" /> Dashboard
-          </button>
+        <button
+          className="flex items-center px-6 py-3 border-2 border-green-500 text-green-500 rounded-lg shadow-md hover:bg-green-500 hover:text-white transition transform active:scale-95"
+          onClick={() => navigate("/dashboard")}
+        >
+          <FaHome className="mr-2" /> Dashboard
+        </button>
 
-          <button
-            className="flex items-center px-6 py-3 border-2 border-indigo-500 text-indigo-500 rounded-lg shadow-md hover:bg-indigo-500 hover:text-white transition transform active:scale-95"
-            onClick={() => console.log("View Solutions")}
-          >
-            <FaBookOpen className="mr-2" /> Solutions
-          </button>
-        </div>
+        <button
+          className="flex items-center px-6 py-3 border-2 border-indigo-500 text-indigo-500 rounded-lg shadow-md hover:bg-indigo-500 hover:text-white transition transform active:scale-95"
+          onClick={() => console.log("View Solutions")}
+        >
+          <FaBookOpen className="mr-2" /> Solutions
+        </button>
       </div>
     </div>
   );

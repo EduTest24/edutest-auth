@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
@@ -16,24 +16,37 @@ const Sidebar = ({
   unvisitedQuestions,
   skippedQuestions,
 }) => {
-  const [activeSubject, setActiveSubject] = React.useState("");
+  const [activeSubject, setActiveSubject] = useState("");
+  const [startingIndices, setStartingIndices] = useState({});
 
-  // Automatically set the active subject based on the current question
+  // Helper function to calculate the starting index for each subject dynamically
+  const getStartingIndices = (questions) => {
+    const indices = {};
+    let currentIndex = 1; // Start question numbering from 1
+
+    // Group questions by subject and assign starting indices
+    questions.forEach((question) => {
+      if (!indices[question.subject]) {
+        indices[question.subject] = currentIndex;
+        currentIndex += questions.filter(
+          (q) => q.subject === question.subject
+        ).length;
+      }
+    });
+
+    return indices;
+  };
+
+  // Automatically set the active subject and calculate starting indices
   useEffect(() => {
     if (questions.length > 0) {
-      const currentSubject =
-        questions[currentQuestionIndex]?.subject || "Physics";
+      const currentSubject = questions[currentQuestionIndex]?.subject;
       setActiveSubject(currentSubject);
+
+      const indices = getStartingIndices(questions);
+      setStartingIndices(indices);
     }
   }, [currentQuestionIndex, questions]);
-
-  // Helper function to calculate the starting index for each subject
-  const getStartingIndex = (subject) => {
-    if (subject === "Physics") return 1;
-    if (subject === "Chemistry") return 31;
-    if (subject === "Maths") return 61;
-    return 1;
-  };
 
   // Count for each state
   const answeredCount = questions.filter(
@@ -107,12 +120,11 @@ const Sidebar = ({
           {questions
             .filter((q) => q.subject === activeSubject)
             .map((question, index) => {
-              const startingIndex = getStartingIndex(activeSubject);
-              const questionNumber = startingIndex + index;
+              const questionNumber = startingIndices[activeSubject] + index;
 
-              // Determine the question's state
-              const isMarked = markedQuestions.includes(index + 1);
-              const isReviewed = reviewedQuestions.includes(index + 1);
+              // Determine the question's state using question IDs for uniqueness
+              const isMarked = markedQuestions.includes(question._id);
+              const isReviewed = reviewedQuestions.includes(question._id);
               const isAnswered =
                 (question.type === "SCQ" &&
                   selectedOptions[question._id] &&
@@ -120,8 +132,8 @@ const Sidebar = ({
                 (question.type === "Numerical" &&
                   numericalAnswers[question._id] &&
                   !isMarked);
-              const isUnvisited = unvisitedQuestions.has(index);
-              const isSkipped = skippedQuestions.has(index + 1);
+              const isUnvisited = unvisitedQuestions.has(question._id);
+              const isSkipped = skippedQuestions.has(question._id);
 
               // Determine the className for each question box
               let className = "question-box";

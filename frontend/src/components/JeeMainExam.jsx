@@ -80,19 +80,19 @@ const JeeMainExam = () => {
 
   const calculateSkippedAndUnvisited = () => {
     const skipped = new Set();
-    const unvisited = new Set(questions.map((_, index) => index + 1)); // Start with all questions as unvisited
+    const unvisited = new Set(questions.map((q) => q._id)); // Start with all question IDs as unvisited
 
-    questions.forEach((_, index) => {
-      const questionId = index + 1;
+    questions.forEach((question, index) => {
+      const questionId = question._id; // Use question ID
 
       const hasAnswer =
-        selectedOptions[questions[index]._id] !== undefined ||
-        numericalAnswers[questions[index]._id] !== undefined;
+        selectedOptions[questionId] !== undefined ||
+        numericalAnswers[questionId] !== undefined;
 
       if (
         !hasAnswer &&
         timeTaken[index] &&
-        !reviewedQuestions.includes(index + 1)
+        !reviewedQuestions.includes(questionId)
       ) {
         // Question was visited but not answered
         skipped.add(questionId);
@@ -188,12 +188,12 @@ const JeeMainExam = () => {
       (currentQuestion.type === "SCQ" &&
         selectedOptions[currentQuestion._id] !== undefined) ||
       (currentQuestion.type === "Numerical" &&
-        numericalAnswers[currentQuestion._id]);
+        numericalAnswers[currentQuestion._id] !== undefined);
 
     if (isAnswered) {
-      if (!markedQuestions.includes(currentQuestionIndex)) {
-        // Add the current question to markedQuestions
-        setMarkedQuestions([...markedQuestions, currentQuestionIndex + 1]);
+      if (!markedQuestions.includes(currentQuestion._id)) {
+        // Add the current question ID to markedQuestions
+        setMarkedQuestions([...markedQuestions, currentQuestion._id]);
       }
     }
   };
@@ -206,12 +206,12 @@ const JeeMainExam = () => {
       (currentQuestion.type === "SCQ" &&
         selectedOptions[currentQuestion._id] === undefined) ||
       (currentQuestion.type === "Numerical" &&
-        !numericalAnswers[currentQuestion._id]);
+        numericalAnswers[currentQuestion._id] === undefined);
 
     if (isUnanswered) {
-      if (!reviewedQuestions.includes(currentQuestionIndex)) {
-        // Add the current question to reviewedQuestions
-        setReviewedQuestions([...reviewedQuestions, currentQuestionIndex + 1]);
+      if (!reviewedQuestions.includes(currentQuestion._id)) {
+        // Add the current question ID to reviewedQuestions
+        setReviewedQuestions([...reviewedQuestions, currentQuestion._id]);
       }
     }
   };
@@ -221,10 +221,10 @@ const JeeMainExam = () => {
 
     // Clear marked and reviewed states for the current question
     setMarkedQuestions(
-      markedQuestions.filter((index) => index !== currentQuestionIndex + 1)
+      markedQuestions.filter((id) => id !== currentQuestion._id)
     );
     setReviewedQuestions(
-      reviewedQuestions.filter((index) => index !== currentQuestionIndex + 1)
+      reviewedQuestions.filter((id) => id !== currentQuestion._id)
     );
 
     // Remove the selected option or numerical input based on the question type
@@ -433,7 +433,6 @@ const JeeMainExam = () => {
             setShowQuestionPaper={setShowQuestionPaper}
             questions={questions}
           />
-          {/* Modal for the Question Paper */}
           <Modal
             isOpen={showQuestionPaper}
             onClose={() => setShowQuestionPaper(false)}
@@ -487,6 +486,7 @@ const JeeMainExam = () => {
       ) : (
         <>
           <Results
+            questions={questions}
             results={results}
             markedQuestions={markedQuestions}
             reviewedQuestions={reviewedQuestions}

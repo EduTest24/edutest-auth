@@ -43,14 +43,14 @@ const Solution = ({
     userSelectedOption === currentQuestion.correctAnswer;
   const isNumericalCorrect =
     currentQuestion.type === "Numerical" &&
-    userNumericalAnswer === currentQuestion.correctAnswer;
+    Number(userNumericalAnswer) == currentQuestion.correctAnswer;
 
   const score = isSCQCorrect ? "+4" : !userSelectedOption ? "0" : "-1";
 
-  const isMarked = markedQuestions?.includes(currentQuestionIndex + 1)
+  const isMarked = markedQuestions?.includes(currentQuestion._id)
     ? "Marked"
     : "Not Marked";
-  const isReviewed = reviewedQuestions?.includes(currentQuestionIndex + 1)
+  const isReviewed = reviewedQuestions?.includes(currentQuestion._id)
     ? "Reviewed"
     : "Not Reviewed";
 
@@ -69,7 +69,7 @@ const Solution = ({
       <div className=" p-2 shadow-md flex justify-around items-center font-bold">
         <div className="flex items-center text-lg">
           <FaClock className="mr-2 text-gray-600" />
-          <span>{timeTaken[currentQuestionIndex + 1] || "N/A"}s</span>
+          <span>{timeTaken[currentQuestionIndex + 1]} s</span>
         </div>
         <div
           className={`font-medium ${

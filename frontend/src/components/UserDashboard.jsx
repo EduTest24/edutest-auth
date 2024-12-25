@@ -216,7 +216,7 @@ const UserDashboard = () => {
     <div className="p-6 bg-blue-50 min-h-screen">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-blue-800 flex items-center">
+        <h1 className="text-2xl font-bold text-blue-800 flex items-center">
           <FontAwesomeIcon icon={faUserCircle} className="mr-2" />
           Welcome, {username}
         </h1>
@@ -248,24 +248,8 @@ const UserDashboard = () => {
         <ExamSummaryCard examData={examData} />
       </div>
 
-      {/* Chart */}
-      <div className="bg-white shadow rounded p-4 mb-6">
-        <h2 className="text-xl font-semibold text-blue-700 mb-4 flex items-center">
-          <FontAwesomeIcon icon={faChartLine} className="mr-2" />
-          Exam Progress
-        </h2>
-        <div>
-          <ApexCharts
-            options={chartData.options}
-            series={chartData.series}
-            type="line"
-            height={350}
-          />
-        </div>
-      </div>
-
       {/* Results Table */}
-      <div className="bg-white shadow rounded p-4">
+      <div className="bg-white shadow rounded p-4 mb-6">
         <h2 className="text-xl font-semibold text-blue-700 mb-4 flex items-center">
           <FontAwesomeIcon icon={faTable} className="mr-2" />
           Exam Results
@@ -342,6 +326,22 @@ const UserDashboard = () => {
             </div>
           </>
         )}
+      </div>
+
+      {/* Chart */}
+      <div className="bg-white shadow rounded p-4 mb-6">
+        <h2 className="text-xl font-semibold text-blue-700 mb-4 flex items-center">
+          <FontAwesomeIcon icon={faChartLine} className="mr-2" />
+          Exam Progress
+        </h2>
+        <div>
+          <ApexCharts
+            options={chartData.options}
+            series={chartData.series}
+            type="line"
+            height={350}
+          />
+        </div>
       </div>
     </div>
   );
