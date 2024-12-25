@@ -12,6 +12,7 @@ import StudyMaterial from "./pages/StudyMaterial";
 import EntranceExamDashboard from "./pages/EntranceExam";
 import ExamsPage from "./pages/ExamsPage";
 import ExamDetailsPage from "./pages/ExamDetailsPage";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/entranceexam" element={<EntranceExamDashboard />} />
         <Route path="/exams" element={<ExamsPage />} />
         <Route path="/examss/:examName" element={<ExamDetailsPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
