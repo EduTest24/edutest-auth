@@ -3,24 +3,15 @@ const router = express.Router();
 const JeeMain = require("../models/JeeMain");
 
 // Filter Endpoint
-router.post("/", async (req, res) => {
-  const filters = req.body;
+app.post("/", async (req, res) => {
+  const { subject } = req.body; // Extract subject from request body
 
   const query = {};
-  if (filters.session) query["examInfo.session"] = filters.session;
-  if (filters.date)
-    query["examInfo.date"] = {
-      $gte: new Date(filters.date.start),
-      $lte: new Date(filters.date.end),
-    };
-  if (filters.subject) query.subject = filters.subject;
-  if (filters.difficulty) query.difficulty = filters.difficulty;
-  if (filters.chapters) query.chapters = { $in: filters.chapters };
-  if (filters.topics) query.topics = { $in: filters.topics };
+  if (subject) query.subject = subject; // Apply subject filter
 
   try {
-    const results = await JeeMain.find(query);
-    res.json(results);
+    const results = await JeeMain.find(query); // Query MongoDB
+    res.json(results); // Send matching questions
   } catch (error) {
     res.status(500).send("Error fetching data");
   }
