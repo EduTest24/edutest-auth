@@ -9,6 +9,7 @@ const testResult = require("./server/routes/testResult");
 const jeeMain = require("./server/routes/jeeMain");
 const jeeResult = require("./server/routes/jeeResult");
 const UserDashboard = require("./server/routes/userDashboard");
+const filterRoutes = require("./server/routes/filterRoutes");
 
 const PORT = process.env.PORT || 5000;
 const MongoDB = process.env.MONGODB_URI; // Debugging line
@@ -25,6 +26,7 @@ app.use("/", testResult);
 app.use("/api/exam", jeeMain);
 app.use("/api/exam", jeeResult);
 app.use("/api/exam", UserDashboard);
+app.use("/api/filter", filterRoutes);
 
 app.use("/", (req, res) => {
   res.send("Hello, World! Backend is working");
