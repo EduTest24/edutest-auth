@@ -12,6 +12,7 @@ import StudyMaterial from "./pages/StudyMaterial";
 import EntranceExamDashboard from "./pages/EntranceExam";
 import ExamsPage from "./pages/ExamsPage";
 import ExamDetailsPage from "./pages/ExamDetailsPage";
+import ExamJeeMain from "./components/ExamJeeMain";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -29,7 +30,8 @@ function App() {
         <Route path="/studymaterial" element={<StudyMaterial />} />
         <Route path="/entranceexam" element={<EntranceExamDashboard />} />
         <Route path="/exams" element={<ExamsPage />} />
-        <Route path="/examss/:examName" element={<ExamDetailsPage />} />
+        <Route path="/exams/:examName" element={<ExamDetailsPage />} />
+        <Route path="/jeemain" element={<ExamJeeMain />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

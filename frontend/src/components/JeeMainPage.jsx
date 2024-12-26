@@ -1,104 +1,93 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const JeeMainExam = () => {
-  const examCards = [
-    {
-      title: "Mock Test 2023 - Paper 1",
-      description:
-        "A full-length mock test based on the 2023 JEE Mains Paper 1.",
-      buttonText: "Start Test",
-    },
-    {
-      title: "Mock Test 2022 - Paper 2",
-      description:
-        "A comprehensive test covering all sections from 2022 Paper 2.",
-      buttonText: "Start Test",
-    },
-    {
-      title: "Physics - Mechanics",
-      description: "Test your understanding of mechanics concepts in Physics.",
-      buttonText: "Attempt Now",
-    },
-    {
-      title: "Mathematics - Calculus",
-      description:
-        "Evaluate your skills in calculus with topic-specific questions.",
-      buttonText: "Attempt Now",
-    },
-  ];
+  const [filters, setFilters] = useState({ subject: "" });
+  const [examData, setExamData] = useState([]); // Holds filtered questions
+  const [loading, setLoading] = useState(false); // Loading state for fetching questions
+  const navigate = useNavigate();
 
-  const renderExamCards = (category) =>
-    examCards.map((card, index) => (
-      <div
-        key={`${category}-${index}`}
-        className="p-6 bg-white rounded-lg shadow-lg"
-      >
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">
-          {card.title}
-        </h3>
-        <p className="text-gray-600 mb-4">{card.description}</p>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-          {card.buttonText}
-        </button>
-      </div>
-    ));
+  const fetchFilteredData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "https://edutest-frontend.onrender.com/api/filter",
+        { subject: filters.subject }
+      );
+      setExamData(response.data || []);
+    } catch (error) {
+      console.error("Error fetching filtered data", error);
+      setExamData([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubjectChange = (e) => {
+    setFilters({ subject: e.target.value });
+  };
+
+  const handleStartTest = () => {
+    navigate("/jeemain", { state: { questions: examData } }); // Navigate to /jeemain with data
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10">
-      {/* Top Section */}
-      <div className="bg-blue-500 text-white py-12 text-center">
-        <h1 className="text-4xl font-bold mb-4">JEE Mains</h1>
-        <p className="text-lg max-w-3xl mx-auto">
-          Prepare for JEE Mains with our comprehensive resources. Practice mock
-          tests, solve previous year papers, and analyze your performance to ace
-          the exam. Choose from a wide variety of tests categorized by year,
-          subject, chapter, or topic.
-        </p>
+    <>
+      <Header />
+      <div className="min-h-screen bg-gray-50 py-10">
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto mb-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+            Filter Questions
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Select a subject to filter the questions and start your mock test.
+          </p>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 font-medium mb-2"
+              htmlFor="subject"
+            >
+              Select Subject
+            </label>
+            <select
+              id="subject"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 focus:outline-none"
+              onChange={handleSubjectChange}
+              value={filters.subject}
+            >
+              <option value="">All Subjects</option>
+              <option value="Physics">Physics</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="Mathematics">Mathematics</option>
+            </select>
+          </div>
+          <button
+            className={`w-full bg-blue-500 text-white font-medium py-3 rounded-lg hover:bg-blue-600 transition ${
+              loading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={fetchFilteredData}
+            disabled={loading}
+          >
+            {loading ? "Loading Questions..." : "Get Questions"}
+          </button>
+        </div>
+
+        {examData.length > 0 && (
+          <div className="flex justify-center">
+            <button
+              onClick={handleStartTest}
+              className="bg-green-500 text-white font-semibold px-8 py-3 rounded-lg hover:bg-green-600 transition"
+            >
+              Start Test
+            </button>
+          </div>
+        )}
       </div>
-
-      {/* Sections */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-12 py-10 space-y-12">
-        {/* Year-wise Papers */}
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-            Year-wise Papers
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {renderExamCards("year")}
-          </div>
-        </div>
-
-        {/* Subject-wise Papers */}
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-            Subject-wise Papers
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {renderExamCards("subject")}
-          </div>
-        </div>
-
-        {/* Chapter-wise Papers */}
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-            Chapter-wise Papers
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {renderExamCards("chapter")}
-          </div>
-        </div>
-
-        {/* Topic-wise Papers */}
-        <div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-            Topic-wise Papers
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {renderExamCards("topic")}
-          </div>
-        </div>
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

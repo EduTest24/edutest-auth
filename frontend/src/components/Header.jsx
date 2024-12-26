@@ -106,7 +106,7 @@ const Header = () => {
           <a href="/studymaterial" className="nav-link">
             Study Material
           </a>
-          <a href="/entranceexam" className="nav-link">
+          <a href="/exams" className="nav-link">
             Exams
           </a>
           <a href="/about" className="nav-link">

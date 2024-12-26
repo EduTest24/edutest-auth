@@ -3,7 +3,7 @@ const router = express.Router();
 const JeeMain = require("../models/JeeMain");
 
 // Filter Endpoint
-app.post("/", async (req, res) => {
+router.post("/", async (req, res) => {
   const { subject } = req.body; // Extract subject from request body
 
   const query = {};
