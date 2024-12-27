@@ -7,7 +7,7 @@ const Options = ({
   type, // SCQ or Numerical
   handleOptionSelect,
   selectedOption,
-  handleNumericalInput,
+  isReviewed, // New prop to check if the question is reviewed
 }) => {
   return (
     <div className="options">
@@ -15,8 +15,10 @@ const Options = ({
         options.map((option, index) => (
           <div
             key={index}
-            className={`option ${selectedOption === index ? "selected" : ""}`}
-            onClick={() => handleOptionSelect(questionId, index)}
+            className={`option ${selectedOption === index ? "selected" : ""} ${
+              isReviewed ? "disabled" : ""
+            }`} // Add a disabled class for styling
+            onClick={() => !isReviewed && handleOptionSelect(questionId, index)} // Disable click when isReviewed is true
           >
             {option.text}
             {option.image && <img src={option.image} alt="Option" />}
@@ -28,8 +30,8 @@ const Options = ({
           <input
             type="number"
             id={`numerical-${questionId}`}
-            onChange={(e) => handleNumericalInput(questionId, e.target.value)}
             placeholder="Enter a number"
+            disabled={isReviewed} // Disable input if question is reviewed
           />
         </div>
       )}

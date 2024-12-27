@@ -11,6 +11,7 @@
   overflow-y: auto;
   transition: transform 0.3s ease;
   margin-bottom: 50px;
+  z-index: 100;
 }
 
 .sidebar.closed {
@@ -47,7 +48,6 @@
   background-color: #ffffff; /* White card background */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  max-width: 300px; /* Limit width for sidebar */
   margin-bottom: 10px;
 }
 
@@ -197,8 +197,6 @@
   }
 
   .question-box {
-    width: 30px;
-    height: 30px;
     font-size: 14px;
   }
 }
