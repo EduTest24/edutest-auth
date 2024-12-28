@@ -7,7 +7,6 @@ import {
   FaTag,
   FaRedoAlt,
   FaHome,
-  FaBookOpen,
 } from "react-icons/fa";
 import { MdQuestionAnswer } from "react-icons/md";
 import RankCalculator from "./Rank";
@@ -80,6 +79,22 @@ const Dashboard = ({
 
   return (
     <div className="dashboard-container bg-gray-100 p-8">
+      {/* Action Buttons */}
+      <div className="flex justify-around space-x-4 mb-6">
+        <button
+          className="flex items-center px-6 py-3 border-2 border-blue-500 text-blue-500 rounded-lg shadow-md hover:bg-blue-500 hover:text-white transition transform active:scale-95"
+          onClick={() => navigate("/exams")}
+        >
+          <FaRedoAlt className="mr-2" /> Retake Test
+        </button>
+
+        <button
+          className="flex items-center px-6 py-3 border-2 border-green-500 text-green-500 rounded-lg shadow-md hover:bg-green-500 hover:text-white transition transform active:scale-95"
+          onClick={() => navigate("/dashboard")}
+        >
+          <FaHome className="mr-2" /> Dashboard
+        </button>
+      </div>
       {/* Header */}
       <header className="flex justify-between items-center bg-white p-6 rounded-lg shadow-md mb-6">
         <h1 className="text-2xl font-bold text-gray-800">JEE Mains</h1>
@@ -239,30 +254,6 @@ const Dashboard = ({
             )}
           </div>
         </div>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex justify-around space-x-4 mt-6">
-        <button
-          className="flex items-center px-6 py-3 border-2 border-blue-500 text-blue-500 rounded-lg shadow-md hover:bg-blue-500 hover:text-white transition transform active:scale-95"
-          onClick={() => navigate("/exams")}
-        >
-          <FaRedoAlt className="mr-2" /> Retake Test
-        </button>
-
-        <button
-          className="flex items-center px-6 py-3 border-2 border-green-500 text-green-500 rounded-lg shadow-md hover:bg-green-500 hover:text-white transition transform active:scale-95"
-          onClick={() => navigate("/dashboard")}
-        >
-          <FaHome className="mr-2" /> Dashboard
-        </button>
-
-        <button
-          className="flex items-center px-6 py-3 border-2 border-indigo-500 text-indigo-500 rounded-lg shadow-md hover:bg-indigo-500 hover:text-white transition transform active:scale-95"
-          onClick={() => console.log("View Solutions")}
-        >
-          <FaBookOpen className="mr-2" /> Solutions
-        </button>
       </div>
     </div>
   );
