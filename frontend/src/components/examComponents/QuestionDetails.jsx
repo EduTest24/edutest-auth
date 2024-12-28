@@ -43,17 +43,20 @@ const QuestionDetails = ({
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/report", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          questionId: question._id,
-          timestamp: new Date().toISOString(),
-        }),
-      });
+      const response = await fetch(
+        "https://edutest-frontend.onrender.com/api/report",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            questionId: question._id,
+            timestamp: new Date().toISOString(),
+          }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {
