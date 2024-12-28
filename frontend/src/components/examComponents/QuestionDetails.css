@@ -43,13 +43,25 @@
   gap: 5px;
 }
 
+.question-content {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none; /* For Firefox */
+  margin-bottom: 2rem;
+}
+
+.question-content::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge */
+}
+
 .question-content h2 {
   font-size: 18px;
   color: #333333; /* Primary Text */
 }
 
 .question-image {
-  max-width: 50%;
+  max-width: 70%;
 }
 
 /* Row 2: Options Container */
@@ -191,4 +203,75 @@
 
 .close-popup:hover {
   background-color: #1976d2;
+}
+/* Report Icon */
+.report-icon {
+  color: #f44336; /* Danger Red */
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.report-icon:hover {
+  color: #d32f2f;
+  transform: scale(1.1);
+}
+
+/* Popup Alert */
+.alert-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeInOut 3s ease-in-out;
+  z-index: 1000;
+}
+
+.alert-icon {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+/* Alert Types */
+.alert-success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  border: 1px solid #bee5eb;
+  color: #0c5460;
+}
+
+/* Fade in and out animation */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
 }
