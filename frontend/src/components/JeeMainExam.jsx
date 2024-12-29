@@ -349,6 +349,34 @@ const JeeMainExam = () => {
         message: "Exam results saved successfully!",
         type: "success",
       });
+      localStorage.removeItem("questions", JSON.stringify(questions));
+      localStorage.removeItem("currentQuestionIndex", currentQuestionIndex);
+      localStorage.removeItem(
+        "selectedOptions",
+        JSON.stringify(selectedOptions)
+      );
+      localStorage.removeItem(
+        "numericalAnswers",
+        JSON.stringify(numericalAnswers)
+      );
+      localStorage.removeItem("timer", timer);
+      localStorage.removeItem(
+        "markedQuestions",
+        JSON.stringify(markedQuestions)
+      );
+      localStorage.removeItem(
+        "reviewedQuestions",
+        JSON.stringify(reviewedQuestions)
+      );
+      localStorage.removeItem(
+        "unvisitedQuestions",
+        JSON.stringify([...unvisitedQuestions])
+      );
+      localStorage.removeItem(
+        "skippedQuestions",
+        JSON.stringify([...skippedQuestions])
+      );
+      localStorage.removeItem("timeTaken", JSON.stringify(timeTaken));
     } catch (error) {
       console.error("Error saving results:", error);
       setPopMessage({

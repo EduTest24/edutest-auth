@@ -22,7 +22,7 @@ const ExploreCategories = () => {
               Access mock exams, practice papers, and more.
             </p>
             <Link
-              to="/entranceexam"
+              to="/exams"
               className="inline-block px-6 py-2 bg-gradient-to-r from-blue-400 to-blue-500 text-white rounded-lg shadow-xl transform hover:scale-105 hover:shadow-2xl transition-all duration-300"
             >
               Exams

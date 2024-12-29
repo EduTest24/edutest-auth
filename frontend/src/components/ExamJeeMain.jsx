@@ -21,7 +21,10 @@ const ExamJeeMain = () => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [numericalAnswers, setNumericalAnswers] = useState({});
   const [isExamCompleted, setIsExamCompleted] = useState(false);
-  const [timer, setTimer] = useState(3 * 60 * 60);
+  const [timer, setTimer] = useState(
+    questions.length * location.state?.defaultTimePerQuestion * 60 ||
+      questions.length * 2 * 60
+  );
   const [results, setResults] = useState(null);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [markedQuestions, setMarkedQuestions] = useState([]); // Array for marked questions
