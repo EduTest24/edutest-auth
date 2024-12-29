@@ -14,25 +14,64 @@ import "./JeeMainExam.css";
 import Loader from "./loader";
 
 const JeeMainExam = () => {
-  const [questions, setQuestions] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOptions, setSelectedOptions] = useState({});
-  const [numericalAnswers, setNumericalAnswers] = useState({});
-  const [isExamCompleted, setIsExamCompleted] = useState(false);
-  const [timer, setTimer] = useState(3 * 60 * 60);
+  const [questions, setQuestions] = useState(() => {
+    const savedQuestions = localStorage.getItem("questions");
+    return savedQuestions ? JSON.parse(savedQuestions) : [];
+  });
+
   const [results, setResults] = useState(null);
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-  const [markedQuestions, setMarkedQuestions] = useState([]); // Array for marked questions
-  const [reviewedQuestions, setReviewedQuestions] = useState([]); // Array for reviewed questions
-  const [popMessage, setPopMessage] = useState({ message: "", type: "" });
 
-  const [unvisitedQuestions, setUnvisitedQuestions] = useState(new Set()); // Set to track unvisited questions
-  const [skippedQuestions, setSkippedQuestions] = useState(new Set()); // Set to track skipped questions
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() => {
+    const savedIndex = localStorage.getItem("currentQuestionIndex");
+    return savedIndex ? parseInt(savedIndex, 10) : 0;
+  });
 
-  const [showQuestionPaper, setShowQuestionPaper] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState(() => {
+    const savedOptions = localStorage.getItem("selectedOptions");
+    return savedOptions ? JSON.parse(savedOptions) : {};
+  });
 
-  const [timeTaken, setTimeTaken] = useState([]); // Array to track time taken for each question
+  const [numericalAnswers, setNumericalAnswers] = useState(() => {
+    const savedNumerical = localStorage.getItem("numericalAnswers");
+    return savedNumerical ? JSON.parse(savedNumerical) : {};
+  });
+
+  const [timer, setTimer] = useState(() => {
+    const savedTimer = localStorage.getItem("timer");
+    return savedTimer ? parseInt(savedTimer, 10) : 3 * 60 * 60;
+  });
+
+  const [markedQuestions, setMarkedQuestions] = useState(() => {
+    const savedMarked = localStorage.getItem("markedQuestions");
+    return savedMarked ? JSON.parse(savedMarked) : [];
+  });
+
+  const [reviewedQuestions, setReviewedQuestions] = useState(() => {
+    const savedReviewed = localStorage.getItem("reviewedQuestions");
+    return savedReviewed ? JSON.parse(savedReviewed) : [];
+  });
+
+  const [unvisitedQuestions, setUnvisitedQuestions] = useState(() => {
+    const savedUnvisited = localStorage.getItem("unvisitedQuestions");
+    return savedUnvisited ? new Set(JSON.parse(savedUnvisited)) : new Set();
+  });
+
+  const [skippedQuestions, setSkippedQuestions] = useState(() => {
+    const savedSkipped = localStorage.getItem("skippedQuestions");
+    return savedSkipped ? new Set(JSON.parse(savedSkipped)) : new Set();
+  });
+
+  const [timeTaken, setTimeTaken] = useState(() => {
+    const savedTimeTaken = localStorage.getItem("timeTaken");
+    return savedTimeTaken ? JSON.parse(savedTimeTaken) : [];
+  });
+
   const [currentStartTime, setCurrentStartTime] = useState(Date.now());
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [showQuestionPaper, setShowQuestionPaper] = useState(false);
+  const [isExamCompleted, setIsExamCompleted] = useState(false);
+
+  const [popMessage, setPopMessage] = useState({ message: "", type: "" });
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -45,20 +84,55 @@ const JeeMainExam = () => {
   useEffect(() => {
     fetchQuestions();
     enterFullscreen();
+
     setCurrentStartTime(Date.now());
 
     const timerInterval = setInterval(() => {
-      setTimer((prev) => {
-        if (prev === 1) {
+      setTimer((prevTimer) => {
+        if (prevTimer <= 1) {
           handleAutoSubmit();
           clearInterval(timerInterval);
         }
-        return prev - 1;
+        return prevTimer - 1;
       });
     }, 1000);
 
     return () => clearInterval(timerInterval);
   }, []);
+
+  useEffect(() => {
+    // Save all necessary data to localStorage whenever it changes
+    localStorage.setItem("questions", JSON.stringify(questions));
+    localStorage.setItem("currentQuestionIndex", currentQuestionIndex);
+    localStorage.setItem("selectedOptions", JSON.stringify(selectedOptions));
+    localStorage.setItem("numericalAnswers", JSON.stringify(numericalAnswers));
+    localStorage.setItem("timer", timer);
+    localStorage.setItem("markedQuestions", JSON.stringify(markedQuestions));
+    localStorage.setItem(
+      "reviewedQuestions",
+      JSON.stringify(reviewedQuestions)
+    );
+    localStorage.setItem(
+      "unvisitedQuestions",
+      JSON.stringify([...unvisitedQuestions])
+    );
+    localStorage.setItem(
+      "skippedQuestions",
+      JSON.stringify([...skippedQuestions])
+    );
+    localStorage.setItem("timeTaken", JSON.stringify(timeTaken));
+  }, [
+    questions,
+    currentQuestionIndex,
+    selectedOptions,
+    numericalAnswers,
+    timer,
+    markedQuestions,
+    reviewedQuestions,
+    unvisitedQuestions,
+    skippedQuestions,
+    timeTaken,
+  ]);
 
   useEffect(() => {
     calculateSkippedAndUnvisited();

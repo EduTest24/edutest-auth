@@ -61,7 +61,7 @@ const JeeMainExam = () => {
               <option value="">All Subjects</option>
               <option value="Physics">Physics</option>
               <option value="Chemistry">Chemistry</option>
-              <option value="Mathematics">Mathematics</option>
+              <option value="Maths">Mathematics</option>
             </select>
           </div>
           <button

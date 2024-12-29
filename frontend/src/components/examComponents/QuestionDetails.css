@@ -83,7 +83,7 @@
   border: 1px solid #2196f3; /* Primary Blue */
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: transform 0.2s, background-color 0.3s ease, color 0.3s ease;
 }
 
 .options .option:hover {
@@ -125,12 +125,16 @@
     flex-direction: column;
     gap: 0;
   }
+  .question-content {
+    height: auto;
+  }
   .question-image {
     max-width: 100%;
   }
   .options-container {
     width: 100%;
     margin-left: 0;
+    margin-bottom: 2rem;
   }
   .numerical-input {
     width: 100%;
@@ -229,7 +233,7 @@
   align-items: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   animation: fadeInOut 3s ease-in-out;
-  z-index: 1000;
+  z-index: 1001;
 }
 
 .alert-icon {

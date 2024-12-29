@@ -18,6 +18,7 @@ const Sidebar = ({
 }) => {
   const [activeSubject, setActiveSubject] = useState("");
   const [startingIndices, setStartingIndices] = useState({});
+  const [uniqueSubjects, setUniqueSubjects] = useState([]);
 
   // Helper function to calculate the starting index for each subject dynamically
   const getStartingIndices = (questions) => {
@@ -37,6 +38,12 @@ const Sidebar = ({
     return indices;
   };
 
+  // Extract unique subjects from the questions array
+  const extractUniqueSubjects = (questions) => {
+    const subjects = [...new Set(questions.map((q) => q.subject))];
+    return subjects;
+  };
+
   // Automatically set the active subject and calculate starting indices
   useEffect(() => {
     if (questions.length > 0) {
@@ -45,13 +52,16 @@ const Sidebar = ({
 
       const indices = getStartingIndices(questions);
       setStartingIndices(indices);
+
+      const subjects = extractUniqueSubjects(questions);
+      setUniqueSubjects(subjects);
     }
   }, [currentQuestionIndex, questions]);
 
   // Count for each state
   const answeredCount = questions.filter(
     (q) =>
-      (q.type === "SCQ" && selectedOptions[q._id]) ||
+      (q.type === "SCQ" && selectedOptions[q._id] + 1) ||
       (q.type === "Numerical" && numericalAnswers[q._id])
   ).length;
 
@@ -104,7 +114,7 @@ const Sidebar = ({
       {/* Subject Tabs */}
       <div className="tabs">
         <div className="tab-buttons">
-          {["Physics", "Chemistry", "Maths"].map((subject) => (
+          {uniqueSubjects.map((subject) => (
             <button
               key={subject}
               className={`tab-btn ${activeSubject === subject ? "active" : ""}`}
@@ -127,7 +137,7 @@ const Sidebar = ({
               const isReviewed = reviewedQuestions.includes(question._id);
               const isAnswered =
                 (question.type === "SCQ" &&
-                  selectedOptions[question._id] &&
+                  selectedOptions[question._id] + 1 &&
                   !isMarked) ||
                 (question.type === "Numerical" &&
                   numericalAnswers[question._id] &&
