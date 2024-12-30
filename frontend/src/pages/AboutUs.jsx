@@ -1,8 +1,6 @@
 import React from "react";
 import aboutImage from "../images/about-us.png";
-import member1 from "../images/member-01.jpg";
-import member2 from "../images/member-02.jpg";
-import member3 from "../images/member-03.jpg";
+import member1 from "../images/owner.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBullseye,
@@ -175,38 +173,8 @@ const AboutUs = () => {
                 alt="Team Member"
                 className="mx-auto rounded-full mb-4"
               />
-              <h3 className="text-lg font-semibold text-gray-800">John Doe</h3>
+              <h3 className="text-lg font-semibold text-gray-800">Hariom</h3>
               <p className="text-gray-600">Founder & CEO</p>
-              <FontAwesomeIcon
-                icon={faEnvelope}
-                className="text-gray-500 text-lg mt-2"
-              />
-            </div>
-            <div className="text-center">
-              <img
-                src={member2}
-                alt="Team Member"
-                className="mx-auto rounded-full mb-4"
-              />
-              <h3 className="text-lg font-semibold text-gray-800">
-                Jane Smith
-              </h3>
-              <p className="text-gray-600">Head of Content</p>{" "}
-              <FontAwesomeIcon
-                icon={faEnvelope}
-                className="text-gray-500 text-lg mt-2"
-              />
-            </div>
-            <div className="text-center">
-              <img
-                src={member3}
-                alt="Team Member"
-                className="mx-auto rounded-full mb-4"
-              />
-              <h3 className="text-lg font-semibold text-gray-800">
-                Mike Johnson
-              </h3>
-              <p className="text-gray-600">Technical Lead</p>{" "}
               <FontAwesomeIcon
                 icon={faEnvelope}
                 className="text-gray-500 text-lg mt-2"

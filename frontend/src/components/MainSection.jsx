@@ -12,7 +12,7 @@ const MainSection = () => {
     <>
       {" "}
       <section className="hero-section bg-blue-50 py-16 h-svh">
-        <div className="container mx-auto px-6 flex flex-row md:flex-row items-center">
+        <div className="container mx-4 px-6 flex flex-row md:flex-row items-center">
           {/* Text Content */}
           <div className="text-content md:w-1/2">
             <h1 className="text-4xl font-bold text-gray-800 leading-snug">

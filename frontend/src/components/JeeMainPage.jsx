@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import Year from "./Year";
+import PracticeSection from "./PracticeSection";
 
 const JeeMainExam = () => {
   const [filters, setFilters] = useState({ subject: "" });
@@ -64,8 +65,9 @@ const JeeMainExam = () => {
   return (
     <>
       <Header />
+      <PracticeSection />
       <Year />
-      <div className="min-h-screen bg-gray-50 py-10">
+      {/* <div className="min-h-screen bg-gray-50 py-10">
         <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl mx-auto mb-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Filter Questions
@@ -113,45 +115,8 @@ const JeeMainExam = () => {
             </button>
           </div>
         )}
-      </div>
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-6">
-          {/* Heading */}
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-            Explore Subject-Wise Practice Tests
-          </h2>
-          <p className="text-lg text-center text-gray-600 mb-10">
-            Get access to chapter-wise practice tests for all subjects,
-            including Mathematics, Physics, Chemistry, and more. Prepare with
-            confidence and track your performance.
-          </p>
+      </div> */}
 
-          {/* Visual Representation */}
-          <div className="relative w-full h-60 bg-gradient-to-r from-blue-100 to-blue-50 rounded-lg shadow-md flex justify-center items-center mb-10">
-            <div className="text-center">
-              <h3 className="text-2xl font-semibold text-gray-800 mb-2">
-                Chapter-wise Tests for Every Subject
-              </h3>
-              <p className="text-gray-600">
-                Practice questions from each chapter to enhance your
-                preparation.
-              </p>
-            </div>
-          </div>
-
-          {/* CTA Section */}
-          <div className="text-center">
-            <button
-              className="px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 transition-colors"
-              onClick={() =>
-                alert("Redirecting to subject-wise practice page!")
-              }
-            >
-              Start Practicing Now
-            </button>
-          </div>
-        </div>
-      </section>
       <Footer />
     </>
   );

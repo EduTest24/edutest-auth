@@ -23,7 +23,7 @@ const PopularExamsSection = () => {
       details: "JEE 2024 will be conducted in two phases: January & April.",
       examDates: "January 2024 (Phase 1), April 2024 (Phase 2)",
       syllabusLink: "path-to-jee-syllabus.pdf", // Replace with the actual syllabus PDF link
-      link: "/exam/jeemain",
+      link: "/exams/jeemain",
     },
     {
       name: "NEET",
@@ -81,12 +81,13 @@ const PopularExamsSection = () => {
               <h3 className="text-xl font-semibold text-gray-800 text-center">
                 {exam.name}
               </h3>
-              <p className="text-gray-600 text-center mt-2">{exam.details}</p>
-              <p className="text-gray-600 text-center mt-2 font-medium">
+              {/* <p className="text-gray-600 text-center mt-2 font-medium">
                 <FaCalendarAlt className="inline-block mr-2 text-blue-500" />
                 Exam Dates: {exam.examDates}
+              </p> */}
+              <p className="text-gray-600 text-center mt-2 font-medium">
+                Practice with PYQ to Boost your preparation.
               </p>
-
               {/* Syllabus Download Button with Icon */}
               <div className="text-center mt-4">
                 <button
