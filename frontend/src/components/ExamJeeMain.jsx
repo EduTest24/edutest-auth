@@ -16,6 +16,7 @@ import Loader from "./loader";
 const ExamJeeMain = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [isResultsVisible, setIsResultsVisible] = useState(true);
   const [questions, setQuestions] = useState(location.state?.questions || []);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState({});
@@ -45,6 +46,10 @@ const ExamJeeMain = () => {
   if (!token) {
     navigate("/auth");
   }
+
+  const handleToggleResultsSolutions = () => {
+    setIsResultsVisible(!isResultsVisible); // Toggle visibility of Results and Solutions
+  };
   useEffect(() => {
     if (questions.length === 0) {
       // Redirect back if no questions are available
@@ -243,27 +248,44 @@ const ExamJeeMain = () => {
       type: "info",
     });
 
+    // Calculate the results
     const results = calculateResults();
     setResults(results);
     setIsExamCompleted(true);
 
+    // Generate unique numeric examId
+    const { date, shift } = questions[0]?.examInfo;
+    const datePart = new Date(date)
+      .toISOString()
+      .slice(0, 10)
+      .replace(/-/g, ""); // YYYYMMDD
+    const shiftPart = shift === "Morning" ? "1" : "2"; // Map shift to a numeric value
+    const examId = Number(`${datePart}${shiftPart}`); // Combine parts into numeric examId
+
+    // Generate unique attemptId
+    const attemptId = `${username}_${new Date().toISOString()}`;
+
+    // Payload for the attempt
     const payload = {
+      attemptId, // Unique identifier for this attempt
       username,
+      examId, // Numeric ID for the exam
       score: results.totalScore,
-      correctAnswers: results.correctQuestions, // Array of correctly answered question IDs
-      incorrectAnswers: results.incorrectQuestions, // Array of incorrectly answered question IDs
-      markedQuestions, // Array of marked question IDs
-      reviewedQuestions, // Array of reviewed question IDs
-      skippedQuestions: Array.from(skippedQuestions), // Convert Set to Array
-      timeTaken: timeTaken, // Total time spent in the exam
+      correctAnswers: results.correctQuestions,
+      incorrectAnswers: results.incorrectQuestions,
+      markedQuestions,
+      reviewedQuestions,
+      skippedQuestions: Array.from(skippedQuestions),
+      timeTaken,
+      timestamp: new Date().toISOString(), // Add timestamp for sorting
     };
 
     try {
-      await axios.post(
-        "https://edutest-frontend.onrender.com/api/exam/jeemain/result",
-        payload,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      // Send the attempt to the backend
+      await axios.post("http://localhost:5000/api/exam/attempts", payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
       setPopMessage({
         message: "Exam results saved successfully!",
         type: "success",
@@ -478,23 +500,31 @@ const ExamJeeMain = () => {
         </>
       ) : (
         <>
-          <Results
-            questions={questions}
-            results={results}
-            markedQuestions={markedQuestions}
-            reviewedQuestions={reviewedQuestions}
-            unvisitedQuestions={Array.from(unvisitedQuestions)}
-            skippedQuestions={Array.from(skippedQuestions)} // Convert Set to Array
-            timeTaken={timeTaken}
-          />
-          <SolutionPage
-            questions={questions}
-            numericalAnswer={numericalAnswers}
-            selectedOptions={selectedOptions}
-            timeTaken={timeTaken}
-            markedQuestions={markedQuestions}
-            reviewedQuestions={reviewedQuestions}
-          />
+          {isResultsVisible ? (
+            <Results
+              questions={questions}
+              results={results}
+              markedQuestions={markedQuestions}
+              reviewedQuestions={reviewedQuestions}
+              unvisitedQuestions={Array.from(unvisitedQuestions)}
+              skippedQuestions={Array.from(skippedQuestions)}
+              timeTaken={timeTaken}
+            />
+          ) : (
+            <SolutionPage
+              questions={questions}
+              numericalAnswer={numericalAnswers}
+              selectedOptions={selectedOptions}
+              timeTaken={timeTaken}
+              markedQuestions={markedQuestions}
+              reviewedQuestions={reviewedQuestions}
+            />
+          )}
+
+          {/* Button to toggle between Results and Solutions */}
+          <button onClick={handleToggleResultsSolutions} className="toggle-btn">
+            {isResultsVisible ? "View Solutions" : "View Results"}
+          </button>
         </>
       )}
     </div>

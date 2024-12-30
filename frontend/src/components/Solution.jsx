@@ -34,18 +34,33 @@ const Solution = ({
 
   const imageBoxStyle =
     "w-full h-64 max-w-2xl mx-auto object-contain bg-gray-200 rounded-lg";
-
   const userSelectedOption = selectedOptions?.[currentQuestion._id];
   const userNumericalAnswer = numericalAnswers?.[currentQuestion._id];
 
+  // Check if the current question is SCQ (Single Choice Question) and if the user's selected option is correct
   const isSCQCorrect =
     currentQuestion.type === "SCQ" &&
     userSelectedOption === currentQuestion.correctAnswer;
+
+  // Check if the current question is Numerical and if the user's numerical answer is correct
   const isNumericalCorrect =
     currentQuestion.type === "Numerical" &&
-    Number(userNumericalAnswer) == currentQuestion.correctAnswer;
+    Number(userNumericalAnswer) === currentQuestion.correctAnswer;
 
-  const score = isSCQCorrect ? "+4" : !userSelectedOption ? "0" : "-1";
+  // Determine the score based on the type of question and correctness of the answer
+  let score;
+  if (isSCQCorrect || isNumericalCorrect) {
+    score = "+4"; // Correct answer, score is +4
+  } else if (currentQuestion.type === "SCQ" && !userSelectedOption) {
+    score = "0"; // No answer selected for SCQ, score is 0
+  } else if (
+    currentQuestion.type === "Numerical" &&
+    (userNumericalAnswer === "" || userNumericalAnswer === undefined)
+  ) {
+    score = "0"; // No answer entered for Numerical, score is 0
+  } else {
+    score = "-1"; // Incorrect answer, score is -1
+  }
 
   const isMarked = markedQuestions?.includes(currentQuestion._id)
     ? "Marked"

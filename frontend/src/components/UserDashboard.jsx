@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ExamSummaryCard from "./ExamSummaryCard";
 import Loader from "./loader";
+import Attempts from "./Attempts";
 
 const UserDashboard = () => {
   const [userResults, setUserResults] = useState([]);
@@ -343,6 +344,7 @@ const UserDashboard = () => {
           />
         </div>
       </div>
+      <Attempts />
     </div>
   );
 };

@@ -10,3 +10,32 @@
   flex-direction: column;
   overflow-y: auto;
 }
+/* Button Design */
+.toggle-btn {
+  position: fixed; /* Fix the button's position */
+  top: 20px; /* Place it near the bottom of the screen */
+  right: 20px; /* Align it to the right side */
+  background-color: #4caf50; /* Same as the success color */
+  color: white;
+  padding: 12px 25px; /* Adjust padding for a larger button */
+  border: none;
+  border-radius: 50px; /* Rounded corners */
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for elevation */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+/* Hover Effect */
+.toggle-btn:hover {
+  background-color: #45a049; /* Slightly darker shade for hover effect */
+  transform: scale(1.05); /* Slightly increase the size on hover */
+}
+
+/* Focus Effect for Accessibility */
+.toggle-btn:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5); /* Add a focus ring */
+}

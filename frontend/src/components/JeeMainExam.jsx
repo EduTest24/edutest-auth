@@ -14,6 +14,7 @@ import "./JeeMainExam.css";
 import Loader from "./loader";
 
 const JeeMainExam = () => {
+  const [isResultsVisible, setIsResultsVisible] = useState(true);
   const [questions, setQuestions] = useState(() => {
     const savedQuestions = localStorage.getItem("questions");
     return savedQuestions ? JSON.parse(savedQuestions) : [];
@@ -80,6 +81,10 @@ const JeeMainExam = () => {
   if (!token) {
     navigate("/auth");
   }
+
+  const handleToggleResultsSolutions = () => {
+    setIsResultsVisible(!isResultsVisible); // Toggle visibility of Results and Solutions
+  };
 
   useEffect(() => {
     fetchQuestions();
@@ -527,6 +532,7 @@ const JeeMainExam = () => {
     <div className="jee-main-exam">
       {!isExamCompleted ? (
         <>
+          {/* Your Exam Components */}
           <Header
             timer={timer}
             formatTime={formatTime}
@@ -587,23 +593,31 @@ const JeeMainExam = () => {
         </>
       ) : (
         <>
-          <Results
-            questions={questions}
-            results={results}
-            markedQuestions={markedQuestions}
-            reviewedQuestions={reviewedQuestions}
-            unvisitedQuestions={Array.from(unvisitedQuestions)}
-            skippedQuestions={Array.from(skippedQuestions)} // Convert Set to Array
-            timeTaken={timeTaken}
-          />
-          <SolutionPage
-            questions={questions}
-            numericalAnswer={numericalAnswers}
-            selectedOptions={selectedOptions}
-            timeTaken={timeTaken}
-            markedQuestions={markedQuestions}
-            reviewedQuestions={reviewedQuestions}
-          />
+          {isResultsVisible ? (
+            <Results
+              questions={questions}
+              results={results}
+              markedQuestions={markedQuestions}
+              reviewedQuestions={reviewedQuestions}
+              unvisitedQuestions={Array.from(unvisitedQuestions)}
+              skippedQuestions={Array.from(skippedQuestions)}
+              timeTaken={timeTaken}
+            />
+          ) : (
+            <SolutionPage
+              questions={questions}
+              numericalAnswer={numericalAnswers}
+              selectedOptions={selectedOptions}
+              timeTaken={timeTaken}
+              markedQuestions={markedQuestions}
+              reviewedQuestions={reviewedQuestions}
+            />
+          )}
+
+          {/* Button to toggle between Results and Solutions */}
+          <button onClick={handleToggleResultsSolutions} className="toggle-btn">
+            {isResultsVisible ? "View Solutions" : "View Results"}
+          </button>
         </>
       )}
     </div>
