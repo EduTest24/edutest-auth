@@ -175,6 +175,9 @@ const Solution = ({
                           <FaTimesCircle className="text-red-500 mr-2" />
                         )}
                         {option.text}
+                        {option.image && (
+                          <img src={option.image} alt="Option" />
+                        )}
                       </span>
                     </div>
                   );

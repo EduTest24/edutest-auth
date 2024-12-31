@@ -15,6 +15,7 @@ import ExamDetailsPage from "./pages/ExamDetailsPage";
 import ExamJeeMain from "./components/ExamJeeMain";
 import NotFound from "./pages/NotFound";
 import SubjectDashboard from "./components/SubjectDashboard";
+import CetExamPage from "./components/cetExamPage";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/exams" element={<ExamsPage />} />
         <Route path="/exams/:examName" element={<ExamDetailsPage />} />
         <Route path="/jeemain" element={<ExamJeeMain />} />
+        <Route path="/mhtcet" element={<CetExamPage />} />
         <Route path="/subject" element={<SubjectDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

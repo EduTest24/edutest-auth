@@ -98,9 +98,9 @@ const UserInfoTracker = () => {
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className=" max-w-7xl mx-auto">
       <h1 className="text-3xl font-semibold text-center mb-6 text-blue-800">
-        Year Wise Mock Tests Results
+        Jee Mains Results
       </h1>
       <div className="bg-white shadow rounded p-4 mb-6">
         <h2 className="text-xl font-semibold text-blue-700 mb-4 flex items-center">
@@ -174,9 +174,9 @@ const UserInfoTracker = () => {
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-4 py-2 bg-blue-200 rounded hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+            className="px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           >
-            <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
+            <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <span className="px-4 py-2">
             Page {currentPage} of {totalPages}
@@ -184,9 +184,9 @@ const UserInfoTracker = () => {
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-blue-200 rounded hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+            className="px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
           >
-            <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+            <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </div>
       </div>

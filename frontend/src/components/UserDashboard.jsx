@@ -15,6 +15,7 @@ import {
 import ExamSummaryCard from "./ExamSummaryCard";
 import Loader from "./loader";
 import Attempts from "./Attempts";
+import CetResults from "./CetComponents/cetResults";
 
 const UserDashboard = () => {
   const [userResults, setUserResults] = useState([]);
@@ -345,6 +346,7 @@ const UserDashboard = () => {
         </div>
       </div>
       <Attempts />
+      <CetResults />
     </div>
   );
 };
