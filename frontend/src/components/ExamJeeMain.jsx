@@ -282,9 +282,13 @@ const ExamJeeMain = () => {
 
     try {
       // Send the attempt to the backend
-      await axios.post("http://localhost:5000/api/exam/attempts", payload, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.post(
+        "https://edutest-frontend.onrender.com/api/exam/attempts",
+        payload,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       setPopMessage({
         message: "Exam results saved successfully!",
