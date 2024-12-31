@@ -18,6 +18,7 @@ const examSchema = new mongoose.Schema({
 });
 
 const userAttemptsSchema = new mongoose.Schema({
+  userId: { type: String, unique: true }, // Add a unique identifier
   username: { type: String, required: true }, // User's username
   exams: { type: [examSchema], default: [] }, // Array of exams with attempts
 });

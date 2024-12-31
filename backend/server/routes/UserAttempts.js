@@ -6,7 +6,7 @@ router.post("/attempts", async (req, res) => {
   const {
     attemptId,
     username,
-    examId, // Unique ID for the exam
+    examId,
     score,
     correctAnswers,
     incorrectAnswers,
@@ -18,12 +18,16 @@ router.post("/attempts", async (req, res) => {
   } = req.body;
 
   try {
-    // Check if the user's document exists
+    // Validate input
+    if (!username || !examId || !attemptId) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
     let user = await UserAttempts.findOne({ username });
 
     if (!user) {
-      // Create a new document if the user doesn't exist
       user = new UserAttempts({
+        userId: username, // Populate `userId` with a unique value
         username,
         exams: [
           {
@@ -45,11 +49,9 @@ router.post("/attempts", async (req, res) => {
         ],
       });
     } else {
-      // Check if the examId already exists in the user's document
       const exam = user.exams.find((e) => e.examId === examId);
 
       if (!exam) {
-        // Add a new exam with the first attempt
         user.exams.push({
           examId,
           attempts: [
@@ -67,7 +69,6 @@ router.post("/attempts", async (req, res) => {
           ],
         });
       } else {
-        // Add the new attempt to the existing exam
         exam.attempts.push({
           attemptId,
           score,
@@ -82,11 +83,10 @@ router.post("/attempts", async (req, res) => {
       }
     }
 
-    // Save the document
     await user.save();
     res.status(200).json({ message: "Attempt saved successfully!" });
   } catch (error) {
-    console.error("Error saving attempt:", error);
+    console.error("Error saving attempt:", error.message);
     res.status(500).json({ message: "Failed to save attempt.", error });
   }
 });
