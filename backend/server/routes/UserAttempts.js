@@ -4,8 +4,8 @@ const UserAttempts = require("../models/Attempts");
 
 router.post("/attempts", async (req, res) => {
   const {
-    username,
     attemptId,
+    username,
     examId, // Unique ID for the exam
     score,
     correctAnswers,
