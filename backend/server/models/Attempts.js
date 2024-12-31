@@ -22,4 +22,4 @@ const userAttemptsSchema = new mongoose.Schema({
   exams: { type: [examSchema], default: [] }, // Array of exams with attempts
 });
 
-module.exports = mongoose.model("UserAttempts", userAttemptsSchema);
+module.exports = mongoose.model("userattempts", userAttemptsSchema);
