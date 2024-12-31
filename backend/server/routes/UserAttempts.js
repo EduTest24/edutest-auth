@@ -4,7 +4,6 @@ const UserAttempts = require("../models/Attempts");
 
 router.post("/attempts", async (req, res) => {
   const {
-    userId,
     username,
     attemptId,
     examId, // Unique ID for the exam
