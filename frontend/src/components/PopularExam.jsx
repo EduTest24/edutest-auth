@@ -39,7 +39,7 @@ const PopularExamsSection = () => {
       details: "MHT-CET 2024 application opens in March. Get ready!",
       examDates: "2024 (Dates not confirmed yet)",
       syllabusLink: "path-to-mhtcet-syllabus.pdf", // Replace with the actual syllabus PDF link
-      link: "/exams/mht-cet",
+      link: "/exams/mhtcet",
     },
     {
       name: "GATE",

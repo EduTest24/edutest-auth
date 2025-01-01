@@ -376,15 +376,20 @@ const ExamJeeMain = () => {
           selectedOptions[question._id] !== undefined &&
           selectedOptions[question._id] === question.correctAnswer
         ) {
-          correctCount += 1;
-          totalScore += 4;
-          correctQuestions.push(index + 1); // Store 1-based index
+          if (question.subject === "Mathematics") {
+            correctCount += 1;
+            totalScore += 2;
+            correctQuestions.push(index + 1); // Store 1-based index
+          } else {
+            correctCount += 1;
+            totalScore += 1;
+            correctQuestions.push(index + 1); // Store 1-based index
+          }
         } else if (
           selectedOptions[question._id] !== undefined &&
           selectedOptions[question._id] !== question.correctAnswer
         ) {
           incorrectCount += 1;
-          totalScore -= 1;
           incorrectQuestions.push(index + 1); // Store 1-based index
         }
       } else if (question.type === "Numerical") {
