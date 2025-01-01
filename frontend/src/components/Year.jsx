@@ -15,20 +15,28 @@ const GroupedQuestionsSection = () => {
         );
         const questions = response.data;
 
-        const groupedByDate = questions.reduce((acc, question) => {
-          if (question.examInfo && question.examInfo.date) {
+        const groupedByDateAndShift = questions.reduce((acc, question) => {
+          if (
+            question.examInfo &&
+            question.examInfo.date &&
+            question.examInfo.shift
+          ) {
+            // Extract date and shift information
             const date = new Date(question.examInfo.date)
               .toISOString()
-              .split("T")[0];
-            if (!acc[date]) {
-              acc[date] = [];
+              .split("T")[0]; // Extract date (e.g., "2023-04-06")
+            const shift = question.examInfo.shift; // Extract shift (e.g., "morning" or "evening")
+            const key = `${date}_${shift}`; // Combine date and shift into a unique key
+
+            if (!acc[key]) {
+              acc[key] = [];
             }
-            acc[date].push(question);
+            acc[key].push(question);
           }
           return acc;
         }, {});
 
-        setGroupedQuestions(groupedByDate);
+        setGroupedQuestions(groupedByDateAndShift);
       } catch (error) {
         console.error("Error fetching questions:", error);
       }
@@ -48,21 +56,24 @@ const GroupedQuestionsSection = () => {
           Complete Mock Papers
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Object.entries(groupedQuestions).map(([date, questions]) => {
-            const formattedDate = new Date(date).toLocaleDateString("en-US", {
+          {Object.entries(groupedQuestions).map(([key, questions]) => {
+            const [formattedDate, shift] = key.split("_");
+            const dateObject = new Date(formattedDate);
+
+            // Format date properly
+            const displayDate = dateObject.toLocaleDateString("en-US", {
               day: "numeric",
               month: "short",
               year: "numeric",
             });
             return (
               <div
-                key={date}
+                key={key}
                 className="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between"
               >
                 <div>
                   <h3 className="text-xl font-semibold text-gray-700">
-                    {formattedDate} {questions[0]?.examInfo?.shift || "N/A"}{" "}
-                    Shift
+                    {displayDate} {questions[0]?.examInfo?.shift || "N/A"} Shift
                   </h3>
                   <p className="text-gray-600 mt-1 flex items-center">
                     <FaQuestionCircle className="mr-2 text-yellow-500" />
