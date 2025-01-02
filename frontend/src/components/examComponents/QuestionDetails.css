@@ -62,6 +62,7 @@
 
 .question-image {
   max-width: 70%;
+  mix-blend-mode: multiply;
 }
 
 /* Row 2: Options Container */
