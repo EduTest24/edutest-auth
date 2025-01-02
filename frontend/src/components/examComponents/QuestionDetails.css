@@ -95,6 +95,7 @@
 .options .option img {
   margin-left: 10px;
   border-radius: 5px;
+  mix-blend-mode: multiply;
 }
 
 /* Selected option */
