@@ -28,9 +28,8 @@ const TimeScoreGraph = ({ results }) => {
     chart: {
       type: "line",
       height: 350,
-      zoom: {
-        enabled: true,
-        type: "x",
+      toolbar: {
+        show: false,
       },
     },
     stroke: {
@@ -67,10 +66,6 @@ const TimeScoreGraph = ({ results }) => {
     markers: {
       size: 5,
       colors: ["#2196F3", "#F44336"],
-    },
-    legend: {
-      position: "top",
-      horizontalAlign: "center",
     },
   };
 

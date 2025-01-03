@@ -12,9 +12,8 @@ const UserDataGraph = ({ userData }) => {
       chart: {
         type: "line", // Line chart for smooth representation
         height: 350,
-        zoom: {
-          enabled: true,
-          type: "x", // Horizontal zoom
+        toolbar: {
+          show: false,
         },
       },
       stroke: {
@@ -58,8 +57,7 @@ const UserDataGraph = ({ userData }) => {
         colors: ["#2196F3", "#F44336"],
       },
       legend: {
-        position: "top",
-        horizontalAlign: "center",
+        show: false,
       },
     },
   });

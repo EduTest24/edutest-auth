@@ -89,13 +89,6 @@ const Dashboard = ({
         >
           <FaRedoAlt className="mr-2" /> Retake Test
         </button>
-
-        <button
-          className="flex items-center px-6 py-3 border-2 border-green-500 text-green-500 rounded-lg shadow-md hover:bg-green-500 hover:text-white transition transform active:scale-95"
-          onClick={() => navigate("/dashboard")}
-        >
-          <FaHome className="mr-2" /> Dashboard
-        </button>
         <button
           className="flex items-center px-6 py-3 border-2 border-purple-500 text-purple-500 rounded-lg shadow-md hover:bg-purple-500 hover:text-white transition transform active:scale-95"
           onClick={handleToggleResultsSolutions}

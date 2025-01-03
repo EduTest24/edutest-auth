@@ -79,9 +79,11 @@ const ExamOverview = ({ userData }) => {
     options: {
       chart: {
         type: "line",
-        toolbar: { show: true },
         animations: { enabled: true, easing: "smooth" },
         background: "#f9f9f9",
+        toolbar: {
+          show: false,
+        },
       },
       xaxis: {
         categories: paginatedAttempts.map((_, index) => `Attempt ${index + 1}`),
@@ -121,10 +123,6 @@ const ExamOverview = ({ userData }) => {
         intersect: false,
         theme: "light",
         x: { format: "dd/MM/yy HH:mm" },
-      },
-      legend: {
-        position: "top",
-        horizontalAlign: "center",
       },
     },
   };

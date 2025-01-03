@@ -8,7 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import TimeScoreGraph from "../Dashboard/TimeScoreGraph";
 import ExamOverview from "../Dashboard/ExamOverview";
-import UserExamOverview from "../Dashboard/UserExamOverview";
 
 const ExamResults = () => {
   const [results, setResults] = useState([]); // Store fetched exam results

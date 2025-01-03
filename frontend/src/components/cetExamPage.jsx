@@ -516,6 +516,7 @@ const ExamJeeMain = () => {
               unvisitedQuestions={Array.from(unvisitedQuestions)}
               skippedQuestions={Array.from(skippedQuestions)}
               timeTaken={timeTaken}
+              handleToggleResultsSolutions={handleToggleResultsSolutions}
             />
           ) : (
             <SolutionPage
@@ -525,13 +526,9 @@ const ExamJeeMain = () => {
               timeTaken={timeTaken}
               markedQuestions={markedQuestions}
               reviewedQuestions={reviewedQuestions}
+              handleToggleResultsSolutions={handleToggleResultsSolutions}
             />
           )}
-
-          {/* Button to toggle between Results and Solutions */}
-          <button onClick={handleToggleResultsSolutions} className="toggle-btn">
-            {isResultsVisible ? "View Solutions" : "View Results"}
-          </button>
         </>
       )}
     </div>
