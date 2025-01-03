@@ -3,15 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ApexCharts from "react-apexcharts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUserCircle,
-  faSearch,
-  faHome,
-  faPaperPlane,
-  faPaperclip,
-  faPenSquare,
-  faClipboardList,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUserCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Loader from "./loader";
 import Attempts from "./Attempts";
 import CetResults from "./CetComponents/cetResults";
@@ -214,7 +206,7 @@ const UserDashboard = () => {
   }
 
   return (
-    <div className="p-6 bg-blue-50 min-h-screen">
+    <div className="p-2 bg-blue-50 min-h-screen">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-blue-800 flex items-center">
