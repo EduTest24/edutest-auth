@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { FaCheckCircle, FaTimesCircle, FaClock } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaTimesCircle,
+  FaClock,
+  FaExchangeAlt,
+} from "react-icons/fa";
 
 const Solution = ({
   questions,
@@ -8,6 +13,7 @@ const Solution = ({
   timeTaken,
   markedQuestions,
   reviewedQuestions,
+  handleToggleResultsSolutions,
 }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(questions[0]);
@@ -73,11 +79,17 @@ const Solution = ({
     <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Main Header */}
       <header className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-8 flex justify-between items-center shadow-lg">
-        <div>
-          <h3 className="text-2xl font-semibold">
-            {currentQuestion.chapters?.[0] || currentQuestion.subject}
-          </h3>
-        </div>
+        <h3 className="text-2xl font-semibold">
+          {currentQuestion.chapters?.[0] || currentQuestion.subject}
+        </h3>
+        {/* Existing Results content */}
+        <button
+          className="flex items-center px-4 py-2 border-2 border-teal-500 text-white rounded-lg shadow-md hover:bg-teal-500 hover:text-white transition transform active:scale-95"
+          onClick={handleToggleResultsSolutions}
+        >
+          <FaExchangeAlt className="mr-2" /> {/* Font Awesome Icon */}
+          Result
+        </button>
       </header>
 
       {/* Sub Header */}

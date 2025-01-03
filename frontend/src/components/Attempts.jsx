@@ -12,6 +12,8 @@ import {
   faArrowRight,
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
+import UserDataGraph from "./Dashboard/UserInfoTracker";
+import UserExamOverview from "./Dashboard/UserExamOverview";
 
 const UserInfoTracker = () => {
   const [userData, setUserData] = useState(null);
@@ -98,99 +100,103 @@ const UserInfoTracker = () => {
   }
 
   return (
-    <div className=" max-w-7xl mx-auto">
-      <h1 className="text-3xl font-semibold text-center mb-6 text-blue-800">
-        Jee Mains Results
-      </h1>
-      <div className="bg-white shadow rounded p-4 mb-6">
-        <h2 className="text-xl font-semibold text-blue-700 mb-4 flex items-center">
-          <FontAwesomeIcon icon={faTable} className="mr-2" />
-          Attempts Analysis
-        </h2>
-        <div className="overflow-x-auto">
-          <table className="w-full table-auto border-collapse border border-blue-200">
-            <thead>
-              <tr className="bg-blue-100">
-                <th className="p-2 border border-blue-300">Exam</th>
-                <th className="p-2 border border-blue-300">Attempt</th>
-                <th className="p-2 border border-blue-300">Score</th>
-                <th className="p-2 border border-blue-300">Correct</th>
-                <th className="p-2 border border-blue-300">Incorrect</th>
-                <th className="p-2 border border-blue-300">Marked</th>
-                <th className="p-2 border border-blue-300">Skipped</th>
-                <th className="p-2 border border-blue-300">Time(m)</th>
-                <th className="p-2 border border-blue-300">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentExams.map((exam) =>
-                exam.attempts.map((attempt, attemptIndex) => {
-                  const totalTime = attempt.timeTaken.reduce(
-                    (acc, time) => acc + time,
-                    0
-                  );
-                  const totalTimeInMinutes = convertTimeToMinutes(totalTime);
-                  return (
-                    <tr
-                      key={`${exam.examId}-${attempt.attemptId}`}
-                      className="even:bg-gray-50 hover:bg-gray-100"
-                    >
-                      <td className="border px-6 py-3 text-sm font-medium text-gray-700">
-                        {formatExamId(exam.examId)}
-                      </td>
-                      <td className="border px-6 py-3 text-sm font-medium text-gray-700">
-                        Attempt {attemptIndex + 1}
-                      </td>
-                      <td className="border px-6 py-3 text-sm font-medium text-gray-700">
-                        {attempt.score}
-                      </td>
-                      <td className="border px-6 py-3 text-sm font-medium text-gray-600">
-                        {attempt.correctAnswers.length}
-                      </td>
-                      <td className="border px-6 py-3 text-sm font-medium text-gray-600">
-                        {attempt.incorrectAnswers.length}
-                      </td>
-                      <td className="border px-6 py-3 text-sm font-medium text-gray-600">
-                        {attempt.markedQuestions.length}
-                      </td>
-                      <td className="border px-6 py-3 text-sm font-medium text-gray-600">
-                        {attempt.skippedQuestions.length}
-                      </td>
-                      <td className="border px-6 py-3 text-sm font-medium text-gray-700">
-                        {totalTimeInMinutes} minutes
-                      </td>
-                      <td className="border px-6 py-3 text-sm font-medium text-gray-700">
-                        {new Date(attempt.timestamp).toLocaleString()}
-                      </td>
-                    </tr>
-                  );
-                })
-              )}
-            </tbody>
-          </table>
-        </div>{" "}
-        {/* Pagination Controls */}
-        <div className="mt-4 flex justify-center items-center">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-          >
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </button>
-          <span className="px-4 py-2">
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-          >
-            <FontAwesomeIcon icon={faArrowRight} />
-          </button>
+    <>
+      <div className=" max-w-full  my-5">
+        <h1 className="text-3xl font-semibold text-center mb-6 text-blue-800">
+          Jee Mains Results
+        </h1>
+        <UserExamOverview userData={userData} />
+        <div className="bg-white shadow rounded p-4 mb-6">
+          <h2 className="text-xl font-semibold text-blue-700 mb-4 flex items-center">
+            <FontAwesomeIcon icon={faTable} className="mr-2" />
+            Attempts Analysis
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full table-auto border-collapse border border-blue-200">
+              <thead>
+                <tr className="bg-blue-100">
+                  <th className="p-2 border border-blue-300">Exam</th>
+                  <th className="p-2 border border-blue-300">Attempt</th>
+                  <th className="p-2 border border-blue-300">Score</th>
+                  <th className="p-2 border border-blue-300">Correct</th>
+                  <th className="p-2 border border-blue-300">Incorrect</th>
+                  <th className="p-2 border border-blue-300">Marked</th>
+                  <th className="p-2 border border-blue-300">Skipped</th>
+                  <th className="p-2 border border-blue-300">Time(m)</th>
+                  <th className="p-2 border border-blue-300">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentExams.map((exam) =>
+                  exam.attempts.map((attempt, attemptIndex) => {
+                    const totalTime = attempt.timeTaken.reduce(
+                      (acc, time) => acc + time,
+                      0
+                    );
+                    const totalTimeInMinutes = convertTimeToMinutes(totalTime);
+                    return (
+                      <tr
+                        key={`${exam.examId}-${attempt.attemptId}`}
+                        className="even:bg-gray-50 hover:bg-gray-100"
+                      >
+                        <td className="border px-6 py-3 text-sm font-medium text-gray-700">
+                          {formatExamId(exam.examId)}
+                        </td>
+                        <td className="border px-6 py-3 text-sm font-medium text-gray-700">
+                          Attempt {attemptIndex + 1}
+                        </td>
+                        <td className="border px-6 py-3 text-sm font-medium text-gray-700">
+                          {attempt.score}
+                        </td>
+                        <td className="border px-6 py-3 text-sm font-medium text-gray-600">
+                          {attempt.correctAnswers.length}
+                        </td>
+                        <td className="border px-6 py-3 text-sm font-medium text-gray-600">
+                          {attempt.incorrectAnswers.length}
+                        </td>
+                        <td className="border px-6 py-3 text-sm font-medium text-gray-600">
+                          {attempt.markedQuestions.length}
+                        </td>
+                        <td className="border px-6 py-3 text-sm font-medium text-gray-600">
+                          {attempt.skippedQuestions.length}
+                        </td>
+                        <td className="border px-6 py-3 text-sm font-medium text-gray-700">
+                          {totalTimeInMinutes} minutes
+                        </td>
+                        <td className="border px-6 py-3 text-sm font-medium text-gray-700">
+                          {new Date(attempt.timestamp).toLocaleString()}
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>{" "}
+          {/* Pagination Controls */}
+          <div className="mt-4 flex justify-center items-center">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+            >
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
+            <span className="px-4 py-2">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
+            >
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
         </div>
+        <UserDataGraph userData={userData} />
       </div>
-    </div>
+    </>
   );
 };
 
