@@ -6,13 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUserCircle,
   faSearch,
-  faChartLine,
-  faTable,
-  faArrowLeft,
-  faArrowRight,
   faHome,
+  faPaperPlane,
+  faPaperclip,
+  faPenSquare,
+  faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
-import ExamSummaryCard from "./ExamSummaryCard";
 import Loader from "./loader";
 import Attempts from "./Attempts";
 import CetResults from "./CetComponents/cetResults";
@@ -146,7 +145,7 @@ const UserDashboard = () => {
   };
 
   const home = () => {
-    navigate("/");
+    navigate("/exams");
   };
 
   const filteredResults = userResults.filter((result) =>
@@ -223,10 +222,10 @@ const UserDashboard = () => {
           Welcome, {username}
         </h1>
         <button
+          className="flex items-center px-4 py-2 border-2 border-purple-500 text-purple-500 rounded-lg shadow-md hover:bg-purple-500 hover:text-white transition transform active:scale-95"
           onClick={home}
-          className="bg-blue-600 text-white py-2 px-2 rounded hover:bg-blue-700 flex items-center"
         >
-          <FontAwesomeIcon icon={faHome} />
+          Exams
         </button>
       </div>
 
@@ -245,106 +244,6 @@ const UserDashboard = () => {
         />
       </div>
 
-      {/* Render the ExamOverviewCard for each exam */}
-      <div className="flex flex-wrap justify-center gap-6 mb-4">
-        <ExamSummaryCard examData={examData} />
-      </div>
-
-      {/* Results Table */}
-      <div className="bg-white shadow rounded p-4 mb-6">
-        <h2 className="text-xl font-semibold text-blue-700 mb-4 flex items-center">
-          <FontAwesomeIcon icon={faTable} className="mr-2" />
-          Exam Results
-        </h2>
-        {userResults.length === 0 ? (
-          <p className="text-gray-600">No exam results found.</p>
-        ) : (
-          <>
-            {/* Responsive Table Wrapper */}
-            <div className="overflow-x-auto">
-              <table className="w-full table-auto border-collapse border border-blue-200">
-                <thead>
-                  <tr className="bg-blue-100">
-                    <th className="p-2 border border-blue-300">Exam Name</th>
-                    <th className="p-2 border border-blue-300">Score</th>
-                    <th className="p-2 border border-blue-300">Correct</th>
-                    <th className="p-2 border border-blue-300">Incorrect</th>
-                    <th className="p-2 border border-blue-300">Skipped</th>
-                    <th className="p-2 border border-blue-300">Time (m)</th>
-                    <th className="p-2 border border-blue-300">Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentResults.map((result) => (
-                    <tr key={result._id} className="hover:bg-blue-50">
-                      <td className="p-2 border border-blue-300">
-                        {result.examName}
-                      </td>
-                      <td className="p-2 border border-blue-300">
-                        {result.score}
-                      </td>
-                      <td className="p-2 border border-blue-300">
-                        {result.correctAnswers.length}
-                      </td>
-                      <td className="p-2 border border-blue-300">
-                        {result.incorrectAnswers.length}
-                      </td>
-                      <td className="p-2 border border-blue-300">
-                        {result.skippedQuestions.length}
-                      </td>
-                      <td className="p-2 border border-blue-300">
-                        {calculateTotalTime(result.timeTaken)}
-                      </td>
-                      <td className="p-2 border border-blue-300">
-                        {new Date(result.timestamp).toLocaleDateString()}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Pagination */}
-            <div className="mt-4 flex justify-center items-center">
-              <button
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                className="px-4 py-2 bg-blue-200 rounded hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-              >
-                <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
-              </button>
-              <span className="px-4 py-2">
-                Page {currentPage} of {totalPages}
-              </span>
-              <button
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-                disabled={currentPage === totalPages}
-                className="px-4 py-2 bg-blue-200 rounded hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
-              >
-                <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
-              </button>
-            </div>
-          </>
-        )}
-      </div>
-
-      {/* Chart */}
-      <div className="bg-white shadow rounded p-4 mb-6">
-        <h2 className="text-xl font-semibold text-blue-700 mb-4 flex items-center">
-          <FontAwesomeIcon icon={faChartLine} className="mr-2" />
-          Exam Progress
-        </h2>
-        <div>
-          <ApexCharts
-            options={chartData.options}
-            series={chartData.series}
-            type="line"
-            height={350}
-          />
-        </div>
-      </div>
       <Attempts />
       <CetResults />
     </div>
