@@ -3,10 +3,9 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTable,
-  faArrowRight,
   faArrowLeft,
+  faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
-import TimeScoreGraph from "../Dashboard/TimeScoreGraph";
 import ExamOverview from "../Dashboard/ExamOverview";
 
 const ExamResults = () => {
@@ -96,7 +95,6 @@ const ExamResults = () => {
   if (error) {
     return <div className="text-red-500">{error}</div>;
   }
-
   return (
     <>
       <div className="max-w-full mx-auto my-5">
@@ -115,7 +113,7 @@ const ExamResults = () => {
             <table className="w-full table-auto border-collapse border border-blue-200">
               <thead className="bg-blue-100">
                 <tr>
-                  <th className="p-2 border border-blue-300">Exam ID (Date)</th>
+                  <th className="p-2 border border-blue-300">Exam</th>
                   <th className="p-2 border border-blue-300">Score</th>
                   <th className="p-2 border border-blue-300">Correct</th>
                   <th className="p-2 border border-blue-300">Incorrect</th>
@@ -196,7 +194,6 @@ const ExamResults = () => {
           </div>
         </div>
       </div>
-      <TimeScoreGraph results={results} />
     </>
   );
 };

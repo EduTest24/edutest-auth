@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const ExploreCategories = () => {
   return (
     <section className="py-16 bg-gray-50 mt-12">
-      <div className="max-w-7xl mx-4 text-center">
+      <div className="max-w-full mx-4 text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-8">
           Explore Our Categories
         </h2>

@@ -21,6 +21,7 @@ const UserInfoTracker = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsPerPage] = useState(5); // Number of results per page
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" }); // Sorting state
 
   const username = localStorage.getItem("username");
 
@@ -30,7 +31,7 @@ const UserInfoTracker = () => {
         const response = await axios.get(
           `https://edutest-frontend.onrender.com/api/user/${username}`
         );
-        setUserData(response.data.data); // Assuming the data is returned in `data.data`
+        setUserData(response.data.data);
         setLoading(false);
       } catch (err) {
         console.error("Error fetching user data:", err);
@@ -43,14 +44,11 @@ const UserInfoTracker = () => {
   }, [username]);
 
   const formatExamId = (examId) => {
-    // Ensure the examId is treated as a string
     const examIdStr = examId.toString();
-
     const year = examIdStr.slice(0, 4);
     const month = parseInt(examIdStr.slice(4, 6), 10);
     const day = examIdStr.slice(6, 8);
     const shift = examIdStr.slice(8);
-
     const monthNames = [
       "Jan",
       "Feb",
@@ -66,7 +64,6 @@ const UserInfoTracker = () => {
       "Dec",
     ];
     const shiftText = shift === "1" ? "Morning" : "Evening";
-
     return `${day} ${monthNames[month - 1]}, ${year} (${shiftText})`;
   };
 
@@ -74,13 +71,38 @@ const UserInfoTracker = () => {
     return (timeInSeconds / 60).toFixed(2); // Convert seconds to minutes with 2 decimal places
   };
 
+  // Sorting function
+  const handleSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedExams = userData ? userData.exams.slice() : [];
+
+  if (sortConfig.key) {
+    sortedExams.sort((a, b) => {
+      const aValue = a[sortConfig.key];
+      const bValue = b[sortConfig.key];
+      if (aValue < bValue) {
+        return sortConfig.direction === "asc" ? -1 : 1;
+      }
+      if (aValue > bValue) {
+        return sortConfig.direction === "asc" ? 1 : -1;
+      }
+      return 0;
+    });
+  }
+
   // Pagination logic
   const totalPages = userData
     ? Math.ceil(userData.exams.length / resultsPerPage)
     : 1;
 
   const currentExams = userData
-    ? userData.exams.slice(
+    ? sortedExams.slice(
         (currentPage - 1) * resultsPerPage,
         currentPage * resultsPerPage
       )
@@ -101,7 +123,7 @@ const UserInfoTracker = () => {
 
   return (
     <>
-      <div className=" max-w-full  my-5">
+      <div className="max-w-full my-5">
         <h1 className="text-3xl font-semibold text-center mb-6 text-blue-800">
           Jee Mains Results
         </h1>
@@ -115,15 +137,60 @@ const UserInfoTracker = () => {
             <table className="w-full table-auto border-collapse border border-blue-200">
               <thead>
                 <tr className="bg-blue-100">
-                  <th className="p-2 border border-blue-300">Exam</th>
-                  <th className="p-2 border border-blue-300">Attempt</th>
-                  <th className="p-2 border border-blue-300">Score</th>
-                  <th className="p-2 border border-blue-300">Correct</th>
-                  <th className="p-2 border border-blue-300">Incorrect</th>
-                  <th className="p-2 border border-blue-300">Marked</th>
-                  <th className="p-2 border border-blue-300">Skipped</th>
-                  <th className="p-2 border border-blue-300">Time(m)</th>
-                  <th className="p-2 border border-blue-300">Date</th>
+                  <th
+                    className="p-2 border border-blue-300 cursor-pointer"
+                    onClick={() => handleSort("examId")}
+                  >
+                    Exam
+                  </th>
+                  <th
+                    className="p-2 border border-blue-300 cursor-pointer"
+                    onClick={() => handleSort("attempt")}
+                  >
+                    Attempt
+                  </th>
+                  <th
+                    className="p-2 border border-blue-300 cursor-pointer"
+                    onClick={() => handleSort("score")}
+                  >
+                    Score
+                  </th>
+                  <th
+                    className="p-2 border border-blue-300 cursor-pointer"
+                    onClick={() => handleSort("correctAnswers")}
+                  >
+                    Correct
+                  </th>
+                  <th
+                    className="p-2 border border-blue-300 cursor-pointer"
+                    onClick={() => handleSort("incorrectAnswers")}
+                  >
+                    Incorrect
+                  </th>
+                  <th
+                    className="p-2 border border-blue-300 cursor-pointer"
+                    onClick={() => handleSort("markedQuestions")}
+                  >
+                    Marked
+                  </th>
+                  <th
+                    className="p-2 border border-blue-300 cursor-pointer"
+                    onClick={() => handleSort("skippedQuestions")}
+                  >
+                    Skipped
+                  </th>
+                  <th
+                    className="p-2 border border-blue-300 cursor-pointer"
+                    onClick={() => handleSort("timeTaken")}
+                  >
+                    Time(m)
+                  </th>
+                  <th
+                    className="p-2 border border-blue-300 cursor-pointer"
+                    onClick={() => handleSort("timestamp")}
+                  >
+                    Date
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -172,29 +239,28 @@ const UserInfoTracker = () => {
                 )}
               </tbody>
             </table>
-          </div>{" "}
+          </div>
           {/* Pagination Controls */}
           <div className="mt-4 flex justify-center items-center">
             <button
+              className="px-4 py-2 border border-blue-300 rounded-l-lg bg-blue-100 hover:bg-blue-200"
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >
               <FontAwesomeIcon icon={faArrowLeft} />
             </button>
-            <span className="px-4 py-2">
+            <span className="mx-4 text-lg font-medium">
               Page {currentPage} of {totalPages}
             </span>
             <button
+              className="px-4 py-2 border border-blue-300 rounded-r-lg bg-blue-100 hover:bg-blue-200"
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >
               <FontAwesomeIcon icon={faArrowRight} />
             </button>
           </div>
         </div>
-        <UserDataGraph userData={userData} />
       </div>
     </>
   );

@@ -3,7 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ApexCharts from "react-apexcharts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUserCircle,
+  faClipboardList,
+} from "@fortawesome/free-solid-svg-icons";
 import Loader from "./loader";
 import Attempts from "./Attempts";
 import CetResults from "./CetComponents/cetResults";
@@ -208,32 +211,26 @@ const UserDashboard = () => {
   return (
     <div className="p-2 bg-blue-50 min-h-screen">
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-blue-800 flex items-center">
-          <FontAwesomeIcon icon={faUserCircle} className="mr-2" />
-          Welcome, {username}
-        </h1>
+      <div className="flex justify-between items-center p-4 bg-white shadow-sm rounded-lg">
+        {/* Left Section: Welcome Message */}
+        <div className="flex items-center gap-3">
+          <FontAwesomeIcon
+            icon={faUserCircle}
+            className="text-blue-700 text-3xl"
+          />
+          <h1 className="text-xl font-semibold text-gray-800">
+            Welcome, <span className="text-blue-600">{username}</span>
+          </h1>
+        </div>
+
+        {/* Right Section: Exams Button */}
         <button
-          className="flex items-center px-4 py-2 border-2 border-purple-500 text-purple-500 rounded-lg shadow-md hover:bg-purple-500 hover:text-white transition transform active:scale-95"
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-medium text-sm rounded-lg hover:bg-blue-700 transition duration-300 shadow-md active:scale-95"
           onClick={home}
         >
+          <FontAwesomeIcon icon={faClipboardList} className="text-lg" />
           Exams
         </button>
-      </div>
-
-      {/* Search Bar */}
-      <div className="relative mb-4">
-        <FontAwesomeIcon
-          icon={faSearch}
-          className="absolute top-1/2 left-3 transform -translate-y-1/2 text-blue-500"
-        />
-        <input
-          type="text"
-          placeholder="Search exams..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full p-2 pl-10 border border-blue-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
       </div>
 
       <Attempts />
